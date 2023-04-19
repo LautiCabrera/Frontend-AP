@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "portafolio-ap-fcc99"
-  }
+    "default": "frontend-ap-19794",
+    "app-front": "frontend-ap-19794"
+  },
+  "targets": {},
+  "etags": {}
 }
