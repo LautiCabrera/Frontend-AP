@@ -11,13 +11,12 @@ import { TokenService } from 'src/app/service/token.service';
   styleUrls: ['./encabezado.component.css']
 })
 
-export class EncabezadoComponent implements OnInit {
+export class EncabezadoComponent {
   
   isLogged = false;
-  persona: Persona = null;
-  datos : any = {};
+  persona: Persona = new Persona("","","","","");
 
-  constructor(public personaService: PersonaService, private router: Router, private tokenService: TokenService, private jsonService: JsonService) { }
+  constructor(public personaService: PersonaService, private router: Router, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.cargarPersona();
@@ -25,15 +24,7 @@ export class EncabezadoComponent implements OnInit {
       this.isLogged = true;
     }else {
       this.isLogged = false;
-    };
-    this.jsonService.obtenerDatos().subscribe(
-      (data : any ) => {
-      this.datos = data;
-    },
-    (error: any) => {
-      console.log(error);
     }
-    );  
   }
 
   onLogOut():void{
@@ -43,6 +34,11 @@ export class EncabezadoComponent implements OnInit {
 
   login(){
     this.router.navigate(['/login'])
+  }
+
+  construirUrl(titulo: String): String{
+    const imagePath = 'https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=50&pause=1000&color=6052FF&center=true&width=1000&height=150&lines=';
+    return `${imagePath}${titulo}`;
   }
 
   cargarPersona(){

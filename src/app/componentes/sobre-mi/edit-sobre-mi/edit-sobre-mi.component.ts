@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Persona } from 'src/app/model/persona.model';
 import { JsonService } from 'src/app/service/json.service';
@@ -13,14 +13,12 @@ import { ModalesService } from 'src/app/service/modales.service';
   templateUrl: './edit-sobre-mi.component.html',
   styleUrls: ['./edit-sobre-mi.component.css']
 })
-export class EditSobreMiComponent {
+export class EditSobreMiComponent implements OnInit {
 
-  persona: Persona = null;
-  datos : any = {};
+  persona: Persona = new Persona("","","","","");
   imageUrl: string;
-  name: string;
 
-  constructor(private personaService: PersonaService, private activatedRouter: ActivatedRoute, private router: Router, private jsonService: JsonService, public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
+  constructor(private personaService: PersonaService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
@@ -31,17 +29,9 @@ export class EditSobreMiComponent {
         alert("Error al modificar");
         this.router.navigate(['']);
       }
-    );
-    this.jsonService.obtenerDatos().subscribe(
-      (data : any ) => {
-      this.datos = data;
-    },
-    (error: any) => {
-      console.log(error);
-    }
-    );
+    )
     this.getImagenes('');  
-  }
+  } 
 
   onUpdate(): void {
     const id = this.activatedRouter.snapshot.params['id'];
@@ -62,7 +52,7 @@ export class EditSobreMiComponent {
     this.imagenService.uploadImage($event, name)
     }
     
-  getImagenes(name: String) {
+  getImagenes(_name: String) {
     const imagesRef = ref(this.storage, `imagen/`);
     listAll(imagesRef)
     .then(async response => {

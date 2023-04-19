@@ -10,13 +10,12 @@ import { TokenService } from 'src/app/service/token.service';
   styleUrls: ['./sobre-mi.component.css']
 })
 
-export class SobreMiComponent implements OnInit{
+export class SobreMiComponent implements OnInit {
 
   isLogged = false;
-  persona: Persona = null;
-  datos : any = {};
+  persona: Persona = new Persona("","","","","");
   
-  constructor(public personaService: PersonaService, private tokenService: TokenService, private jsonService: JsonService) { }  
+  constructor(public personaService: PersonaService, private tokenService: TokenService) { }  
   
   ngOnInit(): void {
 
@@ -25,15 +24,7 @@ export class SobreMiComponent implements OnInit{
       this.isLogged = true;
     }else {
       this.isLogged = false;
-    };
-    this.jsonService.obtenerDatos().subscribe(
-      (data : any ) => {
-      this.datos = data;
-    },
-    (error: any) => {
-      console.log(error);
-    }
-    );  
+    } 
   }  
   
   cargarPersona(){

@@ -60,11 +60,11 @@
             <div style="height: 92px;">
                 <div align="center">
                     <a>
-                        <img width="90%"
-                            src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=50&pause=1000&color=6052FF&center=true&width=1000&height=150&lines=Desarrollador+Full+Stack+Jr;T%C3%A9cnico+Desarrollador+de+Software;Tester+QA+Manual">
+                        <img width="90%" [src]="construirUrl(persona.titulo)">
                     </a>
                     <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#editUserModal">
-                        <i *ngIf="isLogged" class="bi bi-pencil-square" href="#" style="color: rgb(255, 255, 255);"></i>
+                        <i *ngIf="isLogged" routerLink="/editProf/{{persona.id}}" class="bi bi-pencil-square" href="#"
+                            style="color: rgb(255, 255, 255);"></i>
                     </span>
                 </div>
             </div>

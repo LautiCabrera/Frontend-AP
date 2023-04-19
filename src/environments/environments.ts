@@ -1,13 +1,14 @@
 export const environment = {
-
+  
     production: false,
     URL: 'http://localhost:8080/',
-    firebase: {
-        apiKey: "AIzaSyBFXO4sWdcV26nQVqT1Rrf_lH1JbbsfyRk",
-        authDomain: "portafolio-ap-fcc99.firebaseapp.com",
-        projectId: "portafolio-ap-fcc99",
-        storageBucket: "portafolio-ap-fcc99.appspot.com",
-        messagingSenderId: "641992546683",
-        appId: "1:641992546683:web:02f11bc1911844232185de"
-      }
+
+    firebaseConfig : {
+      apiKey: "AIzaSyBnnSfkKMD6wVgenlLcVvV81zck7tMxN_s",
+      authDomain: "frontend-ap-19794.firebaseapp.com",
+      projectId: "frontend-ap-19794",
+      storageBucket: "frontend-ap-19794.appspot.com",
+      messagingSenderId: "1063648245764",
+      appId: "1:1063648245764:web:0d8a13e5c4362aeac3dd51"
+    }
 };

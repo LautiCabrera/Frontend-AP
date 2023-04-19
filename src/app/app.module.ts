@@ -28,7 +28,7 @@ import { EditSobreMiComponent } from './componentes/sobre-mi/edit-sobre-mi/edit-
 import { initializeApp } from "firebase/app";
 import { provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
+import { ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
@@ -38,6 +38,7 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { AngularFireModule } from '@angular/fire/compat';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { EditEncabezadoComponent } from './componentes/encabezado/edit-encabezado/edit-encabezado.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
     EditEducacionComponent,
     NewHabilidadComponent,
     EditHabilidadComponent,
-    EditSobreMiComponent
+    EditSobreMiComponent,
+    EditEncabezadoComponent
   ],
   imports: [
     BrowserModule,
@@ -66,10 +68,10 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideStorage(() => getStorage()),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

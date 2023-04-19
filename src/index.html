@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Portfolio</title>
@@ -8,14 +9,28 @@
   <!--Tipografía-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap" rel="stylesheet">
   <!-- Íconos-->
   <script src="https://kit.fontawesome.com/edb8bcf97d.js" crossorigin="anonymous"></script>
   <script type="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
   <link rel="icon" type="icon" href="imagenes/html.png">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyBnnSfkKMD6wVgenlLcVvV81zck7tMxN_s",
+      authDomain: "frontend-ap-19794.firebaseapp.com",
+      projectId: "frontend-ap-19794",
+      storageBucket: "frontend-ap-19794.appspot.com",
+      messagingSenderId: "1063648245764",
+      appId: "1:1063648245764:web:0d8a13e5c4362aeac3dd51"
+    };
+    const app = initializeApp(firebaseConfig);
+  </script>
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
 </html>
