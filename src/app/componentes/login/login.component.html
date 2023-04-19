@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="col-md-6 d-none d-md-flex bg-image"></div>
+        <div class="col-md-6 bg-light">
+            <div class="login d-flex align-items-center py-5">       
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h3 class="display-4">Bienvenido</h3>
+                            <p class="text-muted mb-4">Ingrese las credenciales de acceso</p>
+                            <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+                                <div class="form-group mb-3">
+                                    <input id="nombreUsuario" type="email" name="nombreUsuario" class="form-control rounded-pill border-0 shadow-sm px-4" 
+                                    [(ngModel)]="nombreUsuario" required />
+                                    <label class="form-label" for="nombreUsuario">Usuario</label>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <input id="password" type="password" name="password" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" 
+                                    [(ngModel)]="password" required />
+                                    <label class="form-label" for="password">Contraseña</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Iniciar sesión</button>
+                                <div class="text-center d-flex justify-content-between mt-4"><p>¿No tienes cuenta? <a href="" class="font-italic text-muted"> 
+                                        <u>Registrarse</u></a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

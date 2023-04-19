@@ -1,0 +1,121 @@
+.cointer-fluid{
+  width: 1074px;
+  margin-left: 0px;
+}
+
+@media (max-width: 600px){
+  .navbar>.container-fluid{
+    justify-content:center;
+  }
+}
+
+@media (max-width: 600px){
+  .container-lg{
+    margin-top: 200px;
+  }
+}
+
+ul.navbar-nav{
+  width: 550px;
+}
+
+@media (max-width: 600px){
+  ul.navbar-nav{
+    width: 100px;
+  }
+}
+
+.btn{
+    width: 150px; 
+    background-size: cover;
+}
+
+@media (max-width: 600px) {
+    .navbar{
+      justify-content:center;
+    }
+}
+
+.main-menu[_ngcontent-vtp-c14] {
+    align-items: center;
+    padding: 10px;
+    height: 50px;
+    margin-bottom: 0;
+    margin-right: 300px;
+    display: inline-flex;
+}
+
+@media (max-width: 600px){
+    .main-menu[_ngcontent-vtp-c14]{
+        margin-right:0px;
+    }
+}
+
+li.main-menu__item{
+  width: 50px;
+  padding-left: 10px;
+}
+
+li{
+    width: 100px;
+    align-items: center;
+    color: white;
+    padding: 10px;
+    height: 50px;
+    list-style: none;
+    display: inline-flex;
+    flex-direction: row;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
+
+.hit-the-floor {
+  text-shadow: 0 0 5px #6052FF, 0 0 15px #6052FF, 0 0 20px #6052FF, 0 0 40px #6052FF, 0 0 60px #00b7ff, 0 0 10px #8f83fd, 0 0 98px #00b7ff;
+    color: #bde3fc;
+  font-family: "Sacramento", cursive;
+  text-align: center;
+  animation: blink 5s infinite;
+  -webkit-animation: blink 12s infinite;
+}
+
+@-webkit-keyframes blink {
+  20%,
+  24%,
+  55% {
+    color: #111;
+    text-shadow: none;
+  }
+
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    text-shadow: 0 0 5px #6052FF, 0 0 15px #6052FF, 0 0 20px #6052FF, 0 0 40px #6052FF, 0 0 60px #00b7ff, 0 0 10px #8f83fd, 0 0 98px #00b7ff;
+    color: #bde3fc;
+  }
+}
+
+@keyframes blink {
+  20%,
+  24%,
+  55% {
+    color: #111;
+    text-shadow: none;
+  }
+
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+      text-shadow: 0 0 5px #6052FF, 0 0 15px #6052FF, 0 0 20px #6052FF, 0 0 40px #6052FF, 0 0 60px #00b7ff, 0 0 10px #8f83fd, 0 0 98px #00b7ff;
+      color: #bde3fc;
+  }
+}

@@ -1,0 +1,34 @@
+<div class="container-fluid background-grey" id="experiencia">
+    <div class="container py-4 contenedor">
+        <h2 class="display-6 mb-3 h2-lines">Experiencia</h2><br>
+        <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#itemPlus">
+            <i *ngIf="isLogged" routerLink="/addExp" type="button" class="bi bi-plus-circle"></i>
+        </span>
+        <ul class="row justify-content-center list-unstyled mt-3">
+            <li class="col-12 card mb-3">
+                <div class="col-md-12">
+                    <div class="card-body" *ngFor="let experiencia of experiencia">
+                        <h4 class="card-title display-6 text-center">{{experiencia.nombre}}</h4>
+                        <p style="text-align:justify;" class="card-text fs-4">{{experiencia.descripcion}}</p>
+                        <div class="row justify-content-between">
+                            <div class="col-md">
+                                <p class="fs-4">
+                                    <span class="fw-bolder">Duración:</span> Ene 2023 - Mar 2023
+                                </p>
+                            </div>
+                            <div class="col-md" align="right" *ngIf="isLogged">
+                                <a target="_blank" href="https://www.credly.com/badges/b9145ecf-6016-4e46-9296-d8b7b3de59a5" style="margin-right: 175px;" class="btn btn-lg">Más info</a>
+                                <span class="align-self-end edit-icon" data-bs-toggle="modal"data-bs-target="#itemModal">
+                                    <i routerLink="/editExp/{{experiencia.id}}" type="button" class="bi bi-pencil-square"></i>
+                                </span>
+                                <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <i (click)="delete(experiencia.id)" type="button" class="bi bi-trash3"></i>
+                                </span>
+                            </div>
+                        </div><hr>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

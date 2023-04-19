@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        <form (ngSubmit)="Guardar()" novalidate #f="ngForm">
+            <div class="form-group">
+                <label for="nombre">Nombre de la habilidad:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required>
+            </div><br>
+            <div class="form-group">
+                <label for="descripcion">Porcentaje:</label>
+                <input type="text" style="height: 100;" class="form-control" id="progreso" name="progreso" [(ngModel)]="progreso" required>
+            </div><br>
+            <button class="btn btn-primary" style="margin-right: 10px;">Agregar habilidad</button>
+            <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
+        </form>
+    </div>
+</div>
