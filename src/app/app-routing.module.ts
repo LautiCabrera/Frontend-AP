@@ -10,6 +10,8 @@ import { NewHabilidadComponent } from './componentes/habilidades/new-habilidad/n
 import { EditHabilidadComponent } from './componentes/habilidades/edit-habilidad/edit-habilidad.component';
 import { EditSobreMiComponent } from './componentes/sobre-mi/edit-sobre-mi/edit-sobre-mi.component';
 import { EditEncabezadoComponent } from './componentes/encabezado/edit-encabezado/edit-encabezado.component';
+import { EditProyectoComponent } from './componentes/proyectos/edit-proyecto/edit-proyecto.component';
+import { NewProyectoComponent } from './componentes/proyectos/new-proyecto/new-proyecto.component';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path:'addHab', component: NewHabilidadComponent, data: {expectedRol:['admin']}},
   {path:'editHab/:id', component: EditHabilidadComponent, data: {expectedRol:['admin']}},
   {path:'editPer/:id', component: EditSobreMiComponent, data: {expectedRol:['admin']}},
-  {path:'editProf/:id', component: EditEncabezadoComponent, data: {expectedRol:['admin']}}
+  {path:'editProf/:id', component: EditEncabezadoComponent, data: {expectedRol:['admin']}},
+  {path:'addProy', component: NewProyectoComponent, data: {expectedRol:['admin']}},
+  {path:'ediProy/:id', component: EditProyectoComponent, data: {expectedRol:['admin']}}
 ];
 
 @NgModule({

@@ -39,6 +39,8 @@ import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config
 import { AngularFireModule } from '@angular/fire/compat';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { EditEncabezadoComponent } from './componentes/encabezado/edit-encabezado/edit-encabezado.component';
+import { EditProyectoComponent } from './componentes/proyectos/edit-proyecto/edit-proyecto.component';
+import { NewProyectoComponent } from './componentes/proyectos/new-proyecto/new-proyecto.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { EditEncabezadoComponent } from './componentes/encabezado/edit-encabezad
     NewHabilidadComponent,
     EditHabilidadComponent,
     EditSobreMiComponent,
-    EditEncabezadoComponent
+    EditEncabezadoComponent,
+    EditProyectoComponent,
+    NewProyectoComponent
   ],
   imports: [
     BrowserModule,
