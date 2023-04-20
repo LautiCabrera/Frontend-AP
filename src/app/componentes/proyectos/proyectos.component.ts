@@ -33,7 +33,7 @@ export class ProyectosComponent implements OnInit {
   }
 
   cargarProyectos(): void{
-    this.Proyectos.lista().subscribe(data =>{ this.proyectos = data; })
+    this.Proyectos.lista().subscribe(data =>{ this.proyectos = data; });
   } 
 
   delete(id?: number){
@@ -42,7 +42,7 @@ export class ProyectosComponent implements OnInit {
         data => {
           this.cargarProyectos();
         }, err => {
-          alert("No fue posible eliminar la educación");
+          alert("No fue posible eliminar el proyecto");
         }
       )
     }

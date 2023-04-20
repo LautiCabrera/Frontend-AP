@@ -11,9 +11,9 @@ import { ProyectoService } from 'src/app/service/proyecto.service';
 })
 export class NewProyectoComponent {
 
-  nombre: string;
-  descripcion: string;
-  url: string;
+  nombre: String;
+  descripcion: String;
+  url: String;
 
   constructor(private proyecto: ProyectoService, private router: Router, private modalSS: ModalesService) { }
 
@@ -24,7 +24,7 @@ export class NewProyectoComponent {
     const proyecto = new Proyectos(this.nombre, this.descripcion, this.url);
     this.proyecto.save(proyecto).subscribe(
       data =>{
-        alert("Proyecto añadida con éxito");
+        alert("Proyecto añadido con éxito");
         this.modalSS.$modal.emit(false);
         const scrollX = window.scrollX;
         const scrollY = window.scrollY;

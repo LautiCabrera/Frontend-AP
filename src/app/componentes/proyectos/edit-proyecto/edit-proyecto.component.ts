@@ -22,7 +22,7 @@ export class EditProyectoComponent {
       data =>{
         this.proyecto = data;
       }, err =>{
-        alert("Error al modificar educación");
+        alert("Error al modificar proyecto");
         this.router.navigate(['']);
       }
     )
@@ -39,7 +39,7 @@ export class EditProyectoComponent {
         window.scrollTo(scrollX, scrollY);
         this.router.navigate(['']);
       }, err =>{ 
-         alert("Error al modificar educación");
+         alert("Error al modificar proyecto");
          this.router.navigate(['']);
       }
     )

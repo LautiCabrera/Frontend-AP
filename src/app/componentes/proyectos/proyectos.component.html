@@ -13,16 +13,16 @@
                         <img src="../assets/Portafolio.jpg" alt="Portafolio" class="img-fluid">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title display-5 text-center">Portafolio Argentina Programa</h5>
-                        <p style="text-align:justify;" class="card-text fs-4">En este potafolio están plasmadas todas
-                            las habilidades adquiridas durante el cursado de AP.</p>
+                        <h5 class="card-title display-5 text-center">{{proyectos.nombre}}</h5>
+                        <p style="text-align:justify;" class="card-text fs-4">{{proyectos.descripcion}}</p>
                         <div class="row justify-content-between mb-3">
                             <div class="col-md">
                                 <p class="fs-4">
                                     <span class="fw-bolder">Año:</span> 2022
                                 </p>
                             </div>
-                            <div class="col-md text-center"><a traget="_blank" href="" class="btn btn-lg">Al sitio</a>
+                            <div class="col-md text-center">
+                                <a traget="_blank" [href]=proyectos.url class="btn btn-lg">Al sitio</a>
                             </div>
                         </div>
                         <span class="align-self-end edit-icon" data-bs-toggle="modal"

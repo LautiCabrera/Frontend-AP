@@ -3,7 +3,7 @@ export class Proyectos {
     id?: number;
     nombre: String;
     descripcion: String;
-    url: String
+    url: String;
 
     constructor(nombre: String, descripcion: String, url: String){
         this.nombre = nombre;
