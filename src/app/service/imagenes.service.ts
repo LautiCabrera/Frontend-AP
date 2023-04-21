@@ -6,27 +6,47 @@ import { Storage, getDownloadURL, list, ref, uploadBytes} from '@angular/fire/st
 })
 export class ImagenesService {
 
-  url: String = "";
+  urlPer: String = "";
+  urlEdu: String = "";
 
   constructor(private storage: Storage) { }
 
-  public uploadImage($event: any, name: String){
+  public uploadImagenPer($event: any, name: String){
     const file = $event.target.files[0];
-    const imgRef = ref(this.storage, `imagen/`+ name);
+    const imgRef = ref(this.storage, `Persona/${name}`);
     uploadBytes(imgRef, file).then(response => {
-      this.getImagenes();
-    })
-    .catch(error => console.log(error));
+      this.getImagenesPer();
+    }).catch(error => console.log(error));
   }
 
-  getImagenes(){
-    const imagenesRef = ref(this.storage, `imagen/`+ name);
+  getImagenesPer(){
+    const imagenesRef = ref(this.storage, `Persona/${name}`);
     list(imagenesRef).then(async response => {
       for(let item of response.items){
-        this.url = await getDownloadURL(item);
-        console.log("La URL es: " + this.url);
+        this.urlPer = await getDownloadURL(item);
+        console.log("La URL es: " + this.urlPer);
       }
     })    
     .catch(error => console.log(error));      
   }
+
+  public uploadImagenEdu($event: any, name: String){
+    const file = $event.target.files[0];
+    const imgRef = ref(this.storage, `Educacion/${name}`);
+    uploadBytes(imgRef, file).then(response => {
+      this.getImagenesEdu();
+    }).catch(error => console.log(error));
+  }
+
+  getImagenesEdu(){
+    const imagenesRef = ref(this.storage, `Educacion/${name}`);
+    list(imagenesRef).then(async response => {
+      for(let item of response.items){
+        this.urlEdu = await getDownloadURL(item);
+        console.log("La URL es: " + this.urlEdu);
+      }
+    })    
+    .catch(error => console.log(error));      
+  }
+
 }
