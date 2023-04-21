@@ -7,32 +7,37 @@
         <div *ngIf="modalEduNew == true"><app-new-educacion></app-new-educacion></div>
         <ul class="row justify-content-center list-unstyled mt-3">
             <li class="col-12 card mb-3" *ngFor="let educacion of educacion">
-                <div class="col-md-12">
-                    <div class="card-body">
-                        <h4 class="card-title display-6 text-center">{{educacion.nombre}}</h4>
-                        <p style="text-align:justify;" class="card-text fs-4">{{educacion.descripcion}}</p>
-                        <div class="row justify-content-between">
-                            <div class="col-md">
-                                <p class="fs-4">
-                                    <span class="fw-bolder">Duración:</span> Ene 2023 - Mar 2023
-                                </p>
-                            </div>
-                            <div class="col-md" align="right" *ngIf="isLogged">
-                                <a target="_blank"
-                                    href="https://www.credly.com/badges/b9145ecf-6016-4e46-9296-d8b7b3de59a5"
-                                    style="margin-right: 175px;" class="btn btn-lg">Más info</a>
-                                <span class="align-self-end edit-icon" data-bs-toggle="modal"
-                                    data-bs-target="#itemModal">
-                                    <i (click)="openEditEdu()" type="button" class="bi bi-pencil-square"></i>
-                                </span>
-                                <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                    <i (click)="delete(educacion.id)" type="button" class="bi bi-trash3"></i>
-                                </span>
-                            </div>
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <div class="edu-img">
+                            <img src={{educacion.imagen}} alt="AP" class="img-fluid">
                         </div>
-                        <hr>
                     </div>
-                    <div *ngIf="modalEduEdit == true"><app-edit-educacion></app-edit-educacion></div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h4 class="card-title display-6 text-center">{{educacion.nombre}}</h4>
+                            <p style="text-align:justify;" class="card-text fs-4">{{educacion.descripcion}}</p>
+                            <div class="row justify-content-between">
+                                <div class="col-md">
+                                    <p class="fs-4">
+                                        <span class="fw-bolder">Duración:</span> {{educacion.duracion}}
+                                    </p>
+                                </div>
+                                <div class="col-md text-center">
+                                    <a target="_blank" href="" class="btn btn-lg">Más info</a>
+                                    <span class="align-self-end edit-icon" data-bs-toggle="modal"
+                                        data-bs-target="#itemModal">
+                                        <i *ngIf="isLogged" routerLink="/editEdu/{{educacion.id}}"
+                                            class="bi bi-pencil-square"></i>
+                                    </span>
+                                    <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <i *ngIf="isLogged" (click)="delete(educacion.id)" class="bi bi-trash3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
                 </div>
             </li>
         </ul>

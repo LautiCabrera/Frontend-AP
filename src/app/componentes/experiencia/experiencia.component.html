@@ -8,7 +8,9 @@
             <li class="col-12 card mb-3" *ngFor="let experiencia of experiencia">
                 <div class="row g-0">
                     <div class="col-md-4 d-flex align-items-center">
-                        <div class="edu-img"><img src="../assets/MindHub.png" alt="AP" class="img-fluid"></div>
+                        <div class="edu-img">
+                            <img src="../assets/MindHub.png" alt="AP" class="img-fluid">
+                        </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -21,9 +23,7 @@
                                     </p>
                                 </div>
                                 <div class="col-md text-center">
-                                    <a target="_blank"
-                                        href="https://www.credly.com/badges/b9145ecf-6016-4e46-9296-d8b7b3de59a5"
-                                        class="btn btn-lg">Más info</a>
+                                    <a target="_blank" href="" class="btn btn-lg">Más info</a>
                                     <span class="align-self-end edit-icon" data-bs-toggle="modal"
                                         data-bs-target="#itemModal">
                                         <i routerLink="/editExp/{{experiencia.id}}" class="bi bi-pencil-square"></i>

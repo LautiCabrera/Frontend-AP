@@ -3,11 +3,26 @@
         <form (ngSubmit)="Actualizar()" novalidate #f="ngForm">
             <div class="form-group">
                 <label for="nombre">Nombre del estudio:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="educacion.nombre" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="educacion.nombre"
+                    required>
             </div><br>
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
-                <input type="text" style="height: 100;" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="educacion.descripcion" required>
+                <input type="text" style="height: 100;" class="form-control" id="descripcion" name="descripcion"
+                    [(ngModel)]="educacion.descripcion" required>
+            </div><br>
+            <div class="form-group">
+                <label for="duracion">Duracion:</label>
+                <input type="text" class="form-control" id="duracion" name="duracion" [(ngModel)]="educacion.duracion"
+                    required>
+            </div><br>
+            <div class="form-group">
+                <label for="img">Imagen:</label>
+                <input type="file" class="form-control" id="img" name="img" [(ngModel)]="imagenUrl"
+                    (change)="uploadImagen($event)" accept=".jpg, .jpeg, .png">
+            </div><br>
+            <div class="imagen">
+                <img [src]="imagenService.urlEdu" width="200">
             </div><br>
             <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
             <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>

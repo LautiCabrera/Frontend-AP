@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Persona } from 'src/app/model/persona.model';
-import { JsonService } from 'src/app/service/json.service';
 import { PersonaService } from 'src/app/service/persona.service';
 import { TokenService } from 'src/app/service/token.service';
 
@@ -42,6 +41,6 @@ export class EncabezadoComponent {
   }
 
   cargarPersona(){
-    this.personaService.detalle(1).subscribe(data => {this.persona = data});
+    this.personaService.detalle(2).subscribe(data => {this.persona = data});
   }
 }

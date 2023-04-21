@@ -1,27 +1,32 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Educacion } from 'src/app/model/educacion';
 import { EducacionService } from 'src/app/service/educacion.service';
+import { ImagenesService } from 'src/app/service/imagenes.service';
 import { ModalesService } from 'src/app/service/modales.service';
+import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage'
 
 @Component({
   selector: 'app-new-educacion',
   templateUrl: './new-educacion.component.html',
   styleUrls: ['./new-educacion.component.css']
 })
+
 export class NewEducacionComponent {
+  
+  nombre: String;
+  descripcion: String;
+  duracion: String;
+  imagenUrl: String;
 
-  nombre: string;
-  descripcion: string;
-
-  constructor(private educacion: EducacionService, private router: Router, private modalSS: ModalesService) { }
+  constructor(private educacionService: EducacionService, private router: Router, private activatedRouter: ActivatedRoute, public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
 
   ngOnInit(): void {
   }
  
   Guardar(): void{
-    const educacion = new Educacion(this.nombre, this.descripcion);
-    this.educacion.save(educacion).subscribe(
+    const educacion = new Educacion(this.nombre, this.descripcion, this.duracion, this.imagenUrl);
+    this.educacionService.save(educacion).subscribe(
       data =>{
         alert("Educación añadida con éxito");
         this.modalSS.$modal.emit(false);
@@ -34,7 +39,7 @@ export class NewEducacionComponent {
         alert("Fallo al añadir educación");
         this.modalSS.$modal.emit(false);
       }
-    )
+    );
   }
 
   Cancel(){

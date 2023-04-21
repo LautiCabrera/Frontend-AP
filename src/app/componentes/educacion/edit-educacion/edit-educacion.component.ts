@@ -2,48 +2,66 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Educacion } from 'src/app/model/educacion';
 import { EducacionService } from 'src/app/service/educacion.service';
+import { ImagenesService } from 'src/app/service/imagenes.service';
 import { ModalesService } from 'src/app/service/modales.service';
+import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage'
 
 @Component({
   selector: 'app-edit-educacion',
   templateUrl: './edit-educacion.component.html',
-  styleUrls: ['./edit-educacion.component.css']
+  styleUrls: ['./edit-educacion.component.css'],
 })
 
 export class EditEducacionComponent implements OnInit {
 
-  educacion: Educacion = null;
+  educacion: Educacion = new Educacion("","","","");
+  imagenUrl: String;
 
-  constructor(private Educacion: EducacionService, private activatedRouter: ActivatedRoute, private router: Router, private modalSS: ModalesService) { }
+  constructor(private educacionService: EducacionService, private activatedRouter: ActivatedRoute, private router: Router,public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
-    this.Educacion.detail(id).subscribe(
+    this.educacionService.detalle(id).subscribe(
       data =>{
         this.educacion = data;
       }, err =>{
         alert("Error al modificar educación");
         this.router.navigate(['']);
       }
-    )
+    );
   }
 
   Actualizar(): void{
     const id = this.activatedRouter.snapshot.params['id'];
-    this.Educacion.update(id, this.educacion).subscribe(
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    this.educacionService.update(id, this.educacion).subscribe(
       data => {
-        this.modalSS.$modal.emit(false);
-        const scrollX = window.scrollX;
-        const scrollY = window.scrollY;
-        window.location.reload();
-        window.scrollTo(scrollX, scrollY);
         this.router.navigate(['']);
+        window.scrollTo(scrollX, scrollY);
       }, err =>{ 
          alert("Error al modificar educación");
          this.router.navigate(['']);
       }
-    )
+    );
   }
+
+  uploadImagen($event:any){
+    const id = this.activatedRouter.snapshot.params['id'];
+    const name = "edu_"+ id;
+    this.imagenService.uploadImagenEdu($event, name);
+  }
+    
+  getImagenes(_name: String) {
+    const imagesRef = ref(this.storage, `Educacion/${_name}`);
+    listAll(imagesRef)
+    .then(async response => {
+      for(let item of response.items){
+          this.imagenUrl = await getDownloadURL(item);
+        }
+      }).catch(error => console.log(error));     
+  }
+
 
   Cancel(){
     this.modalSS.$modal.emit(false);

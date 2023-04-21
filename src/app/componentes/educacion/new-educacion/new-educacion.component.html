@@ -7,7 +7,17 @@
             </div><br>
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
-                <input type="text" style="height: 100;" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="descripcion" required>
+                <input type="text" style="height: 100;" class="form-control" id="descripcion" name="descripcion"
+                    [(ngModel)]="descripcion" required>
+            </div><br>
+            <div class="form-group">
+                <label for="duracion">Duracion:</label>
+                <input type="text" class="form-control" id="duracion" name="duracion" [(ngModel)]="duracion" required>
+            </div><br>
+            <div class="form-group">
+                <label for="img">Imagen:</label>
+                <input type="file" class="form-control" id="img" name="img" [(ngModel)]="imagenUrl" (change)="($event)"
+                    accept=".jpg, .jpeg, .png">
             </div><br>
             <button class="btn btn-primary" style="margin-right: 10px;">Agregar educación</button>
             <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
