@@ -8,6 +8,7 @@ export class ImagenesService {
 
   urlPer: String = "";
   urlEdu: String = "";
+  urlProy: String = "";
 
   constructor(private storage: Storage) { }
 
@@ -40,6 +41,25 @@ export class ImagenesService {
 
   getImagenesEdu(){
     const imagenesRef = ref(this.storage, `Educacion/${name}`);
+    list(imagenesRef).then(async response => {
+      for(let item of response.items){
+        this.urlEdu = await getDownloadURL(item);
+        console.log("La URL es: " + this.urlEdu);
+      }
+    })    
+    .catch(error => console.log(error));      
+  }
+
+  public uploadImagenProy($event: any, name: String){
+    const file = $event.target.files[0];
+    const imgRef = ref(this.storage, `Proyecto/${name}`);
+    uploadBytes(imgRef, file).then(response => {
+      this.getImagenesEdu();
+    }).catch(error => console.log(error));
+  }
+
+  getImagenesProy(){
+    const imagenesRef = ref(this.storage, `Proyecto/${name}`);
     list(imagenesRef).then(async response => {
       for(let item of response.items){
         this.urlEdu = await getDownloadURL(item);
