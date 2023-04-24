@@ -17,6 +17,10 @@
                     required>
             </div><br>
             <div class="form-group">
+                <label for="duracion">Link de interés:</label>
+                <input type="text" class="form-control" id="info" name="info" [(ngModel)]="educacion.info" required>
+            </div><br>
+            <div class="form-group">
                 <label for="img">Imagen:</label>
                 <input type="file" class="form-control" id="img" name="img" [(ngModel)]="imagenUrl"
                     (change)="uploadImagen($event)" accept=".jpg, .jpeg, .png">

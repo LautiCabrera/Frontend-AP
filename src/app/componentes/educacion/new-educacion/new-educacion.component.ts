@@ -18,6 +18,7 @@ export class NewEducacionComponent {
   descripcion: String;
   duracion: String;
   imagenUrl: String;
+  info: String;
 
   constructor(private educacionService: EducacionService, private router: Router, private activatedRouter: ActivatedRoute, public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
 
@@ -25,7 +26,7 @@ export class NewEducacionComponent {
   }
  
   Guardar(): void{
-    const educacion = new Educacion(this.nombre, this.descripcion, this.duracion, this.imagenUrl);
+    const educacion = new Educacion(this.nombre, this.descripcion, this.duracion, this.imagenUrl, this.info);
     this.educacionService.save(educacion).subscribe(
       data =>{
         alert("Educación añadida con éxito");

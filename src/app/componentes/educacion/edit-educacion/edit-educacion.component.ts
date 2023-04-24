@@ -14,7 +14,7 @@ import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage'
 
 export class EditEducacionComponent implements OnInit {
 
-  educacion: Educacion = new Educacion("","","","");
+  educacion: Educacion = new Educacion("","","","", "");
   imagenUrl: String;
 
   constructor(private educacionService: EducacionService, private activatedRouter: ActivatedRoute, private router: Router,public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
@@ -22,17 +22,19 @@ export class EditEducacionComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
     this.educacionService.detalle(id).subscribe(
-      data =>{
+      data => {
         this.educacion = data;
-      }, err =>{
+      }, err => {
         alert("Error al modificar educación");
         this.router.navigate(['']);
       }
     );
+    this.getImagenes('');  
   }
 
   Actualizar(): void{
     const id = this.activatedRouter.snapshot.params['id'];
+    this.educacion.imagen = this.imagenService.urlEdu;
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
     this.educacionService.update(id, this.educacion).subscribe(
@@ -48,12 +50,12 @@ export class EditEducacionComponent implements OnInit {
 
   uploadImagen($event:any){
     const id = this.activatedRouter.snapshot.params['id'];
-    const name = "edu_"+ id;
+    const name = "edu_" + id;
     this.imagenService.uploadImagenEdu($event, name);
   }
     
   getImagenes(_name: String) {
-    const imagesRef = ref(this.storage, `Educacion/${_name}`);
+    const imagesRef = ref(this.storage, `Educacion/`);
     listAll(imagesRef)
     .then(async response => {
       for(let item of response.items){
@@ -61,7 +63,6 @@ export class EditEducacionComponent implements OnInit {
         }
       }).catch(error => console.log(error));     
   }
-
 
   Cancel(){
     this.modalSS.$modal.emit(false);

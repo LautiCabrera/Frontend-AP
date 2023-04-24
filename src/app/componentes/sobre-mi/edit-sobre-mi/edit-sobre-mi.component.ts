@@ -3,19 +3,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Persona } from 'src/app/model/persona.model';
 import { PersonaService } from 'src/app/service/persona.service';
 import { ImagenesService } from 'src/app/service/imagenes.service';
-import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage'
+import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage';
 import { ModalesService } from 'src/app/service/modales.service';
-
 
 @Component({
   selector: 'app-edit-sobre-mi',
   templateUrl: './edit-sobre-mi.component.html',
   styleUrls: ['./edit-sobre-mi.component.css']
 })
+
 export class EditSobreMiComponent implements OnInit {
 
   persona: Persona = new Persona("","","","","");
-  imagenUrl: string;
+  imagenUrl: String;
 
   constructor(private personaService: PersonaService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
 
@@ -58,8 +58,7 @@ export class EditSobreMiComponent implements OnInit {
       for(let item of response.items){
           this.imagenUrl = await getDownloadURL(item);
         }
-      })    
-    .catch(error => console.log(error))      
+      }).catch(error => console.log(error))      
   }
   
   Cancel(){
