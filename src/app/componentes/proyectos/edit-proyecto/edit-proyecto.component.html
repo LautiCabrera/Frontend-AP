@@ -12,8 +12,16 @@
                     [(ngModel)]="proyecto.descripcion" required>
             </div><br>
             <div class="form-group">
-                <label for="descripcion">Link relacionado:</label>
-                <input type="text" class="form-control" id="url" name="url" [(ngModel)]="proyecto.url" required>
+                <label for="descripcion">Link de interés:</label>
+                <input type="text" class="form-control" id="info" name="info" [(ngModel)]="proyecto.info" required>
+            </div><br>
+            <div class="form-group">
+                <label for="img">Imagen:</label>
+                <input type="file" class="form-control" id="img" name="img" [(ngModel)]="imagenUrl"
+                    (change)="uploadImagen($event)" accept=".jpg, .jpeg, .png">
+            </div><br>
+            <div class="imagen">
+                <img [src]="imagenService.urlProy" width="200">
             </div><br>
             <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
             <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>

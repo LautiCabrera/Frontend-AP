@@ -9,7 +9,7 @@
             <div class="col-lg-6 " *ngFor="let proyectos of proyectos">
                 <div class="card shadow m-3 card-height1">
                     <div>
-                        <img src="../assets/Portafolio.jpg" alt="Portafolio" class="img-fluid">
+                        <img src="{{proyectos.imagen}}" alt="Portafolio" class="img-fluid">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title display-5 text-center">{{proyectos.nombre}}</h5>
@@ -21,7 +21,7 @@
                                 </p>
                             </div>
                             <div class="col-md text-center">
-                                <a traget="_blank" [href]=proyectos.url class="btn btn-lg">Al sitio</a>
+                                <a traget="_blank" [href]=proyectos.info class="btn btn-lg">Al sitio</a>
                             </div>
                         </div>
                         <span class="align-self-end edit-icon" data-bs-toggle="modal"

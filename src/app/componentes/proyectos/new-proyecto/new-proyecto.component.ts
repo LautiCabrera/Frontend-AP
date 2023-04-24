@@ -13,7 +13,9 @@ export class NewProyectoComponent {
 
   nombre: String;
   descripcion: String;
-  url: String;
+  duracion: String;
+  imagen: String;
+  info: String;
 
   constructor(private proyecto: ProyectoService, private router: Router, private modalSS: ModalesService) { }
 
@@ -21,7 +23,7 @@ export class NewProyectoComponent {
   } 
  
   Guardar(): void{
-    const proyecto = new Proyectos(this.nombre, this.descripcion, this.url);
+    const proyecto = new Proyectos(this.nombre, this.descripcion, this.duracion, this.imagen, this.info);
     this.proyecto.save(proyecto).subscribe(
       data =>{
         alert("Proyecto añadido con éxito");
