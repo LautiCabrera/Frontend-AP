@@ -12,6 +12,11 @@
                     [(ngModel)]="proyecto.descripcion" required>
             </div><br>
             <div class="form-group">
+                <label for="duracion">Duracion:</label>
+                <textarea type="text" class="form-control" id="duracion" name="duracion" [(ngModel)]="proyecto.duracion"
+                    required></textarea>
+            </div><br>
+            <div class="form-group">
                 <label for="descripcion">Link de interés:</label>
                 <input type="text" class="form-control" id="info" name="info" [(ngModel)]="proyecto.info" required>
             </div><br>

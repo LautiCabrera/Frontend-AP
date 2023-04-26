@@ -14,14 +14,14 @@ import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage';
 
 export class EditProyectoComponent implements OnInit {
 
-  proyecto: Proyectos = new Proyectos("","","","", "");
+  proyecto: Proyectos = new Proyectos("","","","","");
   imagenUrl: String;
 
-  constructor(private Proyectos: ProyectoService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
+  constructor(private proyectoService: ProyectoService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
-    this.Proyectos.detail(id).subscribe(
+    this.proyectoService.detail(id).subscribe(
       data =>{
         this.proyecto = data;
       }, err =>{
@@ -35,7 +35,7 @@ export class EditProyectoComponent implements OnInit {
   Actualizar(): void{
     const id = this.activatedRouter.snapshot.params['id'];
     this.proyecto.imagen = this.imagenService.urlProy;
-    this.Proyectos.update(id, this.proyecto).subscribe(
+    this.proyectoService.update(id, this.proyecto).subscribe(
       data => {
         this.router.navigate(['']);
       }, err =>{ 
@@ -48,11 +48,11 @@ export class EditProyectoComponent implements OnInit {
   uploadImagen($event:any){
     const id = this.activatedRouter.snapshot.params['id'];
     const name = "proyecto_"+ id;
-    this.imagenService.uploadImagenPer($event, name);
+    this.imagenService.uploadImagenProy($event, name);
   }
 
   getImagenes(_name: String) {
-    const imagesRef = ref(this.storage, `proyecto/`);
+    const imagesRef = ref(this.storage, `Proyecto/`);
     listAll(imagesRef)
     .then(async response => {
       for(let item of response.items){

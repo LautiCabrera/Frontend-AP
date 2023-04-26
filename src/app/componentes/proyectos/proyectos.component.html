@@ -1,10 +1,10 @@
 <section id="proyectos" class="container-fluid">
     <div class="container py-4 contenedor">
+        <h2 class="display-6 mb-3 h2-lines">Proyectos</h2><br>
         <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#itemProyectoPlus">
             <i *ngIf="isLogged" (click)="openNewProy()" class="bi bi-plus-circle"></i>
         </span>
         <div *ngIf="modalProyNew == true"><app-new-proyecto></app-new-proyecto></div>
-        <h2 class="display-6 mb-3 h2-lines">Proyectos</h2>
         <div class="row justify-content-center">
             <div class="col-lg-6 " *ngFor="let proyectos of proyectos">
                 <div class="card shadow m-3 card-height1">
@@ -17,20 +17,22 @@
                         <div class="row justify-content-between mb-3">
                             <div class="col-md">
                                 <p class="fs-4">
-                                    <span class="fw-bolder">Año:</span> 2022
+                                    <span class="fw-bolder">Año:</span> {{proyectos.duracion}}
                                 </p>
                             </div>
                             <div class="col-md text-center">
-                                <a traget="_blank" [href]=proyectos.info class="btn btn-lg">Al sitio</a>
+                                <a traget="_blank" [href]=proyectos.info class="btn btn-lg" style="
+                                margin-right: 20px;">Al sitio</a>
+                                <span class="align-self-end edit-icon" data-bs-toggle="modal"
+                                    data-bs-target="#itemProyectoModal">
+                                    <i *ngIf="isLogged" routerLink="/editProy/{{proyectos.id}}"
+                                        class="bi bi-pencil-square"></i>
+                                </span>
+                                <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <i *ngIf="isLogged" (click)="delete(proyectos.id)" class="bi bi-trash3"></i>
+                                </span>
                             </div>
                         </div>
-                        <span class="align-self-end edit-icon" data-bs-toggle="modal"
-                            data-bs-target="#itemProyectoModal">
-                            <i (click)="openEditProy()" class="bi bi-pencil-square"></i>
-                        </span>
-                        <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            <i (click)="delete(proyectos.id)" class="bi bi-trash3"></i>
-                        </span>
                     </div>
                 </div>
             </div>

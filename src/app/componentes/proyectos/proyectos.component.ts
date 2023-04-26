@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Proyectos } from 'src/app/model/proyectos';
 import { ModalesService } from 'src/app/service/modales.service';
 import { ProyectoService } from 'src/app/service/proyecto.service';
@@ -16,7 +17,7 @@ export class ProyectosComponent implements OnInit {
   modalProyEdit: boolean;
   proyectos: Proyectos[] = [];
 
-  constructor(private Proyectos: ProyectoService, private tokenService: TokenService, private modalSS: ModalesService) { }
+  constructor(private Proyectos: ProyectoService, private router: Router, private tokenService: TokenService, private modalSS: ModalesService) { }
 
   isLogged = false;
 

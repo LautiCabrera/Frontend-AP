@@ -7,8 +7,12 @@
             </div><br>
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
-                <input type="text" style="height: 100;" class="form-control" id="descripcion" name="descripcion"
-                    [(ngModel)]="descripcion" required>
+                <textarea type="text" style="height: 100;" class="form-control" id="descripcion" name="descripcion"
+                    [(ngModel)]="descripcion" required></textarea>
+            </div><br>
+            <div class="form-group">
+                <label for="duracion">Duracion:</label>
+                <input type="text" class="form-control" id="duracion" name="duracion" [(ngModel)]="duracion" required>
             </div><br>
             <div class="form-group">
                 <label for="url">Link de interés:</label>
