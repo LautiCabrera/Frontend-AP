@@ -9,6 +9,7 @@ export class ImagenesService {
   urlPer: String = "";
   urlEdu: String = "";
   urlProy: String = "";
+  urlExp: String = "";
 
   constructor(private storage: Storage) { }
 
@@ -54,7 +55,7 @@ export class ImagenesService {
     const file = $event.target.files[0];
     const imgRef = ref(this.storage, `Proyecto/${name}`);
     uploadBytes(imgRef, file).then(response => {
-      this.getImagenesEdu();
+      this.getImagenesProy();
     }).catch(error => console.log(error));
   }
 
@@ -62,8 +63,27 @@ export class ImagenesService {
     const imagenesRef = ref(this.storage, `Proyecto/${name}`);
     list(imagenesRef).then(async response => {
       for(let item of response.items){
-        this.urlEdu = await getDownloadURL(item);
-        console.log("La URL es: " + this.urlEdu);
+        this.urlProy = await getDownloadURL(item);
+        console.log("La URL es: " + this.urlProy);
+      }
+    })    
+    .catch(error => console.log(error));      
+  }
+
+  public uploadImagenExp($event: any, name: String){
+    const file = $event.target.files[0];
+    const imgRef = ref(this.storage, `Experiencia/${name}`);
+    uploadBytes(imgRef, file).then(response => {
+      this.getImagenesExp();
+    }).catch(error => console.log(error));
+  }
+
+  getImagenesExp(){
+    const imagenesRef = ref(this.storage, `Experiencia/${name}`);
+    list(imagenesRef).then(async response => {
+      for(let item of response.items){
+        this.urlExp = await getDownloadURL(item);
+        console.log("La URL es: " + this.urlExp);
       }
     })    
     .catch(error => console.log(error));      

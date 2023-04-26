@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Experiencia } from 'src/app/model/experiencia';
 import { ExperienciaService } from 'src/app/service/experiencia.service';
+import { ModalesService } from 'src/app/service/modales.service';
 import { TokenService } from 'src/app/service/token.service';
 
 @Component({
@@ -11,9 +12,11 @@ import { TokenService } from 'src/app/service/token.service';
 
 export class ExperienciaComponent implements OnInit {
 
-  experiencia: Experiencia[] = [];
+  modalExpNew: boolean;
+  modalExpEdit: boolean;
+  experiencia: Experiencia[] = []; 
 
-  constructor(private Experiencia: ExperienciaService, private tokenService: TokenService) { }
+  constructor(private Experiencia: ExperienciaService, private tokenService: TokenService, private modalSS: ModalesService) { }
 
   isLogged = false;
 
@@ -21,6 +24,8 @@ export class ExperienciaComponent implements OnInit {
     this.cargarExperiencia();
     if (this.tokenService.getToken()) {
       this.isLogged = true;
+      this.modalSS.$modal.subscribe((valor)=>{this.modalExpNew = valor});
+      this.modalSS.$modal.subscribe((valor)=>{this.modalExpEdit = valor});
     } else {
       this.isLogged = false;
     }
@@ -40,6 +45,10 @@ export class ExperienciaComponent implements OnInit {
         }
       )
     }
+  }
+
+  openNewExp(){
+    this.modalExpNew = true;
   }
 
 }

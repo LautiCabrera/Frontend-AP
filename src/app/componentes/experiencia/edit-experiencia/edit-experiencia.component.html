@@ -1,19 +1,38 @@
 <div class="container" *ngIf="experiencia">
     <div class="row">
         <div>
-            <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+            <form (ngSubmit)="Actualizar()" novalidate #f="ngForm">
                 <div class="form-group">
                     <label for="nombre">Nombre de la empresa</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="experiencia.nombre" required>
+                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="experiencia.nombre"
+                        required>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripcion de la tarea</label>
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="experiencia.descripcion" required>
+                    <label for="descripcion">Descripcion de la tarea:</label>
+                    <textarea type="text" class="form-control" id="descripcion" name="descripcion"
+                        [(ngModel)]="experiencia.descripcion" required></textarea>
                 </div>
-                <button class="btn btn-primary">
-                    Actualizar 
-                </button>
+                <div class="form-group">
+                    <label for="duracion">Duracion:</label>
+                    <input type="text" class="form-control" id="duracion" name="duracion"
+                        [(ngModel)]="experiencia.duracion" required>
+                </div><br>
+                <div class="form-group">
+                    <label for="duracion">Link de interés:</label>
+                    <input type="text" class="form-control" id="info" name="info" [(ngModel)]="experiencia.info"
+                        required>
+                </div><br>
+                <div class="form-group">
+                    <label for="img">Imagen:</label>
+                    <input type="file" class="form-control" id="img" name="img" [(ngModel)]="imagenUrl"
+                        (change)="uploadImagen($event)" accept=".jpg, .jpeg, .png">
+                </div><br>
+                <div class="imagen">
+                    <img [src]="imagenService.urlExp" width="200">
+                </div><br>
+                <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
+                <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
             </form>
         </div>
     </div>
-  </div>
+</div>
