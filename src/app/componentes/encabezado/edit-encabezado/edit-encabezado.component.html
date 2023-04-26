@@ -1,21 +1,27 @@
-<div class="container" *ngIf="persona">
-    <div class="row">
-        <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="persona.nombre" required>
-            </div><br>
-            <div class="form-group">
-                <label for="apellido">Apellido:</label>
-                <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="persona.apellido"
-                    required>
-            </div><br>
-            <div class="form-group">
-                <label for="title">Especialización:</label>
-                <input type="text" class="form-control" id="title" name="title" [(ngModel)]="persona.titulo" required>
-            </div><br>
-            <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
-            <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
-        </form>
+<div class="full-page">
+    <div class="container" *ngIf="persona">
+        <div class="row">
+            <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="persona.nombre"
+                        required>
+                </div><br>
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="persona.apellido"
+                        required>
+                </div><br>
+                <div class="form-group">
+                    <label for="title">Especialización:</label>
+                    <input type="text" class="form-control" id="title" name="title" [(ngModel)]="persona.titulo"
+                        required>
+                </div><br>
+                <div align="center">
+                    <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
+                    <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

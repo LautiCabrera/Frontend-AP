@@ -1,7 +1,5 @@
-<!--Header-->
 <header id="persona" class="container-fluid header">
-    <!--Barra de navegación-->
-    <div class="row" style="height: 200px;">
+    <div class="row">
         <div class="col header-nav">
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container-fluid">
@@ -24,35 +22,75 @@
                                     class="bi bi-github"></i></a>
                         </li>
                     </ul>
-                    <div id="navbarText">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-4">
-                            <li>
-                                <a class="hit-the-floor" href="#sobre_mi">Sobre mí</a>
-                            </li>
-                            <li style="margin-right: 20px;">
-                                <a class="hit-the-floor" href="#habilidades">Habilidades</a>
-                            </li>
-                            <li>
-                                <a class="hit-the-floor" href="#educacion">Educación</a>
-                            </li>
-                            <li>
-                                <a class="hit-the-floor" href="#proyectos">Proyectos</a>
-                            </li>
-                            <li>
-                                <a class="hit-the-floor" href="#contacto">Contacto</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <button class="navbar-toggler" type="button" (click)="toggleMenu()">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" [ngClass]="{'show': isCollapsed}">
+                            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fs-4 menu" style="align-items: center;"
+                                *ngIf="!isCollapsed">
+                                <li>
+                                    <a class="hit-the-floor" href="#sobre_mi">Sobre mí</a>
+                                </li>
+                                <li style="margin-right: 20px;">
+                                    <a class="hit-the-floor" href="#habilidades">Habilidades</a>
+                                </li>
+                                <li>
+                                    <a class="hit-the-floor" href="#educacion">Educación</a>
+                                </li>
+                                <li style="margin-right: 10px;">
+                                    <a class="hit-the-floor" href="#experiencia">Experiencia</a>
+                                </li>
+                                <li>
+                                    <a class="hit-the-floor" href="#proyectos">Proyectos</a>
+                                </li>
+                                <li>
+                                    <a class="hit-the-floor" href="#contacto">Contacto</a>
+                                </li>
+                                <li style="width: 140px;">
+                                    <button type="button" class="btn btn-outline-light" (click)="login()"
+                                        *ngIf="!isLogged">Iniciar Sesión</button>
+                                    <button type="button" class="btn btn-outline-light" (click)="onLogOut()"
+                                        *ngIf="isLogged">Cerrar Sesión</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <!-- Mostrar lista en pantallas inferiores a 600px -->
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fs-4 menu" style="align-items: center;"
+                        *ngIf="isCollapsed">
+                        <li>
+                            <a class="hit-the-floor" href="#sobre_mi">Sobre mí</a>
+                        </li>
+                        <li style="margin-right: 20px;">
+                            <a class="hit-the-floor" href="#habilidades">Habilidades</a>
+                        </li>
+                        <li>
+                            <a class="hit-the-floor" href="#educacion">Educación</a>
+                        </li>
+                        <li style="margin-right: 10px;">
+                            <a class="hit-the-floor" href="#experiencia">Experiencia</a>
+                        </li>
+                        <li>
+                            <a class="hit-the-floor" href="#proyectos">Proyectos</a>
+                        </li>
+                        <li>
+                            <a class="hit-the-floor" href="#contacto">Contacto</a>
+                        </li>
+                        <li style="width: 140px;">
+                            <button type="button" class="btn btn-outline-light" (click)="login()"
+                                *ngIf="!isLogged">Iniciar Sesión</button>
+                            <button type="button" class="btn btn-outline-light" (click)="onLogOut()"
+                                *ngIf="isLogged">Cerrar Sesión</button>
+                        </li>
+                    </ul>
+
                 </div>
-                <button type="button" class="btn btn-outlin-light" (click)="login()" *ngIf="!isLogged">Iniciar
-                    Sesión</button>
-                <button type="button" class="btn btn-outlin-light" (click)="onLogOut()" *ngIf="isLogged">Cerrar
-                    Sesión</button>
             </nav>
         </div>
-    </div>
-    <!--Texto del header-->
-    <div class="container-lg contenedor" align="center">
+    </div><br>
+    <div class="container-lg contenedor" align="center" [ngClass]="{'menu-expanded': isCollapsed}">
         <div>
             <div class="col-12">
                 <h2 class="display-1">{{persona.nombre}} {{persona.apellido}}</h2>
