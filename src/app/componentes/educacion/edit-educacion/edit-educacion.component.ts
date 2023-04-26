@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Educacion } from 'src/app/model/educacion';
 import { EducacionService } from 'src/app/service/educacion.service';
 import { ImagenesService } from 'src/app/service/imagenes.service';
-import { ModalesService } from 'src/app/service/modales.service';
 import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage'
 
 @Component({
@@ -14,10 +13,10 @@ import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage'
 
 export class EditEducacionComponent implements OnInit {
 
-  educacion: Educacion = new Educacion("","","","", "");
+  educacion: Educacion = new Educacion("","","","","");
   imagenUrl: String;
 
-  constructor(private educacionService: EducacionService, private activatedRouter: ActivatedRoute, private router: Router,public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
+  constructor(private educacionService: EducacionService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage) { }
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
@@ -65,7 +64,6 @@ export class EditEducacionComponent implements OnInit {
   }
 
   Cancel(){
-    this.modalSS.$modal.emit(false);
     this.router.navigate(['']);
   }  
 

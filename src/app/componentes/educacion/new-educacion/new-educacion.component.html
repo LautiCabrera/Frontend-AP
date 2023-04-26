@@ -7,24 +7,16 @@
             </div><br>
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
-                <input type="text" style="height: 100;" class="form-control" id="descripcion" name="descripcion"
-                    [(ngModel)]="descripcion" required>
+                <textarea type="text" style="height: 100;" class="form-control" id="descripcion" name="descripcion"
+                    [(ngModel)]="descripcion" required></textarea>
             </div><br>
             <div class="form-group">
-                <label for="duracion">Duracion:</label>
+                <label for="duracion">Duración:</label>
                 <input type="text" class="form-control" id="duracion" name="duracion" [(ngModel)]="duracion" required>
             </div><br>
             <div class="form-group">
-                <label for="duracion">Link de interes:</label>
+                <label for="duracion">Link de interés:</label>
                 <input type="text" class="form-control" id="info" name="info" [(ngModel)]="info" required>
-            </div><br>
-            <div class="form-group">
-                <label for="img">Imagen:</label>
-                <input type="file" class="form-control" id="img" name="img" [(ngModel)]="imagenUrl"
-                    accept=" .jpg, .jpeg, .png">
-            </div><br>
-            <div class="imagen">
-                <img [src]="imagenService.urlEdu" width="200">
             </div><br>
             <button class="btn btn-primary" style="margin-right: 10px;">Agregar educación</button>
             <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>

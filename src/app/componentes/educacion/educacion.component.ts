@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { getDownloadURL, ref } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { Educacion } from 'src/app/model/educacion';
 import { EducacionService } from 'src/app/service/educacion.service';
-import { ImagenesService } from 'src/app/service/imagenes.service';
 import { ModalesService } from 'src/app/service/modales.service';
 import { TokenService } from 'src/app/service/token.service';
 
@@ -18,9 +16,8 @@ export class EducacionComponent implements OnInit {
   modalEduNew: boolean;
   modalEduEdit: boolean;
   educacion: Educacion[] = [];
-  storage: any;
 
-  constructor(private Educacion: EducacionService, private tokenService: TokenService, private router: Router, private modalSS: ModalesService, private imagenService: ImagenesService) { }
+  constructor(private Educacion: EducacionService, private tokenService: TokenService, private modalSS: ModalesService) { }
 
   isLogged = false;
 
