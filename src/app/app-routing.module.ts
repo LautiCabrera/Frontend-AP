@@ -25,7 +25,7 @@ const routes: Routes = [
   {path:'editPer/:id', component: EditSobreMiComponent, data: {expectedRol:['admin']}},
   {path:'editProf/:id', component: EditEncabezadoComponent, data: {expectedRol:['admin']}},
   {path:'addProy', component: NewProyectoComponent, data: {expectedRol:['admin']}},
-  {path:'ediProy/:id', component: EditProyectoComponent, data: {expectedRol:['admin']}}
+  {path:'editProy/:id', component: EditProyectoComponent, data: {expectedRol:['admin']}}
 ];
 
 @NgModule({

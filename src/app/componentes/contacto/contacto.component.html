@@ -3,21 +3,28 @@
         <h2 class="display-6 mb-3 h2-lines">Contacto</h2>
         <div class="row">
             <div class="col p-3 shadow mt-3">
-                <form name="formulario" action="#" method="post">
+                <form (ngSubmit)="submitForm()" method="POST">
                     <div class="row g-3 py-3">
                         <div class="col-md-6">
-                          <input type="text" class="form-control fs-5" placeholder="Ingresá tu nombre" aria-label="Ingresa tu nombre" required name="nombre">
+                            <input type="text" id="name" name="name" class="form-control fs-5"
+                                placeholder="Ingresá tu nombre" aria-label="Ingresa tu nombre" [(ngModel)]="myForm.name"
+                                required>
                         </div>
                         <div class="col-md-6">
-                          <input type="email" class="form-control fs-5" placeholder="Ingresá tu correo" aria-label="Ingresa tu correo" id="inputEmail" required name="email">
+                            <input type="email" id="email" name="email" class="form-control fs-5"
+                                placeholder="Ingresá tu correo" aria-label="Ingresa tu correo"
+                                [(ngModel)]="myForm.email" required>
                         </div>
                         <div class="col">
-                            <textarea class="form-control fs-5" placeholder="Dejame tus comentarios y/o sugerencias" style="height: 100px" required name="mensaje"></textarea>
+                            <textarea id="message" name="message" class="form-control fs-5"
+                                placeholder="Dejame tus comentarios y/o sugerencias" style="height: 100px"
+                                [(ngModel)]="myForm.message" required>
+                            </textarea>
                         </div>
                     </div>
-                    <button type="submit" name="submit" class="btn btn-lg">Enviar mensaje</button>
+                    <button type="submit" class="btn btn-lg">Enviar mensaje</button>
                 </form>
             </div>
         </div>
     </div>
-  </section>
+</section>
