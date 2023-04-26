@@ -1,16 +1,20 @@
-<div class="container" *ngIf="habilidad">
-    <div class="row">
-        <form (ngSubmit)="Actualizar()" novalidate #f="ngForm">
-            <div class="form-group">
-                <label for="nombre">Nombre del estudio:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="habilidad.nombre" required>
-            </div><br>
-            <div class="form-group">
-                <label for="descripcion">Descripción:</label>
-                <input type="text" style="height: 100;" class="form-control" id="progreso" name="progreso" [(ngModel)]="habilidad.progreso" required>
-            </div><br>
-            <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
-            <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
-        </form>
+<div class="full-page">
+    <div class="container" *ngIf="habilidad">
+        <div class="row">
+            <form (ngSubmit)="Actualizar()" novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre de la habilidad:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="habilidad.nombre"
+                        required>
+                </div><br>
+                <div class="form-group">
+                    <label for="descripcion">Porcentaje de habilidad (en número entero):</label>
+                    <input type="text" class="form-control" id="progreso" name="progreso"
+                        [(ngModel)]="habilidad.progreso" required>
+                </div><br>
+                <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
+                <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
+            </form>
+        </div>
     </div>
 </div>

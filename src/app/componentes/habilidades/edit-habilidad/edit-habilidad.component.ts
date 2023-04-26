@@ -43,7 +43,7 @@ export class EditHabilidadComponent implements OnInit {
   }
 
   Cancel(){
-    
+    this.router.navigate(['']);
   }
 
 }

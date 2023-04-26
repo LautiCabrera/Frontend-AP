@@ -1,0 +1,48 @@
+.form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+  .form input {
+    width: 90%;
+    height: 30px;
+    margin: 0.5rem;
+}
+  
+  .form button {
+    padding: 0.5em 1em;
+    border: none;
+    background: rgb(100, 200, 255);
+    cursor: pointer;
+}
+
+.container{
+  max-width: 100%;
+  width: 800px;
+  margin: auto;
+  padding-top: 10%;
+}
+
+.full-page{
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  background-image: url('src/assets/edit.png');
+  background-size: cover;
+}
+
+label{
+  color: #fff;
+}
+
+@media (max-width: 600px){
+  .container{
+      width: 100%;
+      padding-top: 60%;
+  }
+}
