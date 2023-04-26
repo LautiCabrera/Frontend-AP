@@ -54,9 +54,11 @@ h1, h2, h3{
 
 h4, h5, h6, p, a{
     font-weight: 400 !important;
+    text-decoration: none !important;
+    font-size: 18px;
 }
 
-.btn {
+.btn-lg {
     color: var(--white) !important;
     background-color: var(--primary) !important;
 }
@@ -76,6 +78,7 @@ h4, h5, h6, p, a{
 
 
 /*Heading lines*/
+
 .h2-lines{
     display:inline-block;
     position:relative;
