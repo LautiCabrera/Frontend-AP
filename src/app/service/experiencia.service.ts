@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environments';
 
 export class ExperienciaService {
 
-  URL = environment.URL + 'experiencia'
+  URL = 'https://backend-ap-aa0t.onrender.com/experiencia'
 
   constructor(private httpClient: HttpClient) { }
 

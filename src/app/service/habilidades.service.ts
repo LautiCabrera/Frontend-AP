@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 export class HabilidadesService {
 
-  URL = environment.URL + 'habilidades';
+  URL = 'https://backend-ap-aa0t.onrender.com/habilidades';
   
   constructor(private httpClient: HttpClient) { }
 

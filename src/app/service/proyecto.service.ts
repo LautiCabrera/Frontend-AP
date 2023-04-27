@@ -10,7 +10,7 @@ import { Proyectos } from '../model/proyectos';
 
 export class ProyectoService {
 
-  URL = environment.URL + 'proyectos';
+  URL = 'https://backend-ap-aa0t.onrender.com/proyectos';
 
   constructor(private httpClient : HttpClient) { }
 

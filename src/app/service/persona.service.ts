@@ -12,7 +12,7 @@ export class PersonaService {
   
   constructor(private httpClient: HttpClient) { }
 
-  URL = environment.URL + 'personas/';
+  URL = 'https://backend-ap-aa0t.onrender.com/personas/';
 
   public lista(): Observable<Persona[]>{
     return this.httpClient.get<Persona[]>(this.URL + 'lista');
