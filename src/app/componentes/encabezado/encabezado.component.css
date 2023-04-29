@@ -29,6 +29,10 @@
   margin-top: 400px; 
 }
 
+.header-nav{ 
+  height: 65px;
+}
+
 @media (max-width: 600px){
   .header-nav{ 
     height: 65px;
@@ -45,9 +49,12 @@ ul.navbar-nav{
   width: 760px;
 }
 
-@media (max-width: 600px){
-  ul.navbar-nav{
-    width: 100px;
+@media (max-width: 390px){
+  h2{
+    padding-top: 50px;
+  }
+  .navbar-toggler{
+    margin-top: 10px;
   }
 }
 
@@ -75,7 +82,7 @@ ul.navbar-nav{
     display: inline-flex;
 }
 
-@media (max-width: 600px){
+@media (max-width: 1190px){
     .main-menu[_ngcontent-vtp-c14]{
         margin-right:0px;
     }

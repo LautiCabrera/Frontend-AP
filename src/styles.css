@@ -1,7 +1,7 @@
 :root{
     --primary:#6052FF;
     --secondary:#FFFFFF;
-    --secondary-85:rgba(29,36,62,0.85);
+    --secondary-85:#1d243eD9;
     --white:#fff;
     --light-grey:#f3f3f3;
     --grey:#ccc;
@@ -12,6 +12,12 @@
     --white-50:rgba(255,255,255,0.5);
     --black-50:rgba(0,0,0,0.5);
     --font:'Nunito', sans-serif;
+}
+
+@media (max-width: 1190px) and (min-width: 990){
+    body{
+        width: 1190px;
+    }
 }
 
 html{

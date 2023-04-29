@@ -33,6 +33,7 @@ export class EditExperienciaComponent implements OnInit {
 
   Actualizar(): void{
     const id = this.activatedRouter.snapshot.params['id'];
+    window.scrollTo(0, 0);
     this.experiencia.imagen = this.imagenService.urlExp;
     this.experienciaService.update(id, this.experiencia).subscribe(
       data => {

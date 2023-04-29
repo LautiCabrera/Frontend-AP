@@ -20,6 +20,7 @@ export class EditEducacionComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
+    window.scrollTo(0, 0);
     this.educacionService.detalle(id).subscribe(
       data => {
         this.educacion = data;

@@ -21,6 +21,7 @@ export class EditProyectoComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
+    window.scrollTo(0, 0);
     this.proyectoService.detail(id).subscribe(
       data =>{
         this.proyecto = data;
