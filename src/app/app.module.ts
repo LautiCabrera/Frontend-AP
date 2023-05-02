@@ -41,6 +41,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { EditEncabezadoComponent } from './componentes/encabezado/edit-encabezado/edit-encabezado.component';
 import { EditProyectoComponent } from './componentes/proyectos/edit-proyecto/edit-proyecto.component';
 import { NewProyectoComponent } from './componentes/proyectos/new-proyecto/new-proyecto.component';
+import { LoadingSpinnerComponent } from './componentes/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { NewProyectoComponent } from './componentes/proyectos/new-proyecto/new-p
     EditSobreMiComponent,
     EditEncabezadoComponent,
     EditProyectoComponent,
-    NewProyectoComponent
+    NewProyectoComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
