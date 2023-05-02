@@ -14,12 +14,6 @@
     --font:'Nunito', sans-serif;
 }
 
-@media (max-width: 1190px) and (min-width: 990){
-    body{
-        width: 1190px;
-    }
-}
-
 html{
     font-family: var(--font) !important;
 }

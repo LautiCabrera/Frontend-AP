@@ -29,6 +29,12 @@
   margin-top: 400px; 
 }
 
+@media (min-width: 601px) and (max-width:990px){
+  .menu-expanded{
+    margin-top: 270px;
+  }
+}
+
 .header-nav{ 
   height: 65px;
 }
@@ -55,6 +61,12 @@ ul.navbar-nav{
   }
   .navbar-toggler{
     margin-top: 10px;
+  }
+}
+
+@media (min-width: 990px) and (max-width:1090px){
+  .navbar-brand{
+    display: none;
   }
 }
 
