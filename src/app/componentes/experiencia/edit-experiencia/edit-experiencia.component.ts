@@ -20,6 +20,7 @@ export class EditExperienciaComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
+    window.scrollTo(0, 0);
     this.experienciaService.detail(id).subscribe(
       data => {
         this.experiencia = data;
@@ -28,12 +29,11 @@ export class EditExperienciaComponent implements OnInit {
         this.router.navigate(['']);
       }
     );
-    this.getImagenes(''); 
+    this.getImagenes('');
   }
 
   Actualizar(): void{
     const id = this.activatedRouter.snapshot.params['id'];
-    window.scrollTo(0, 0);
     this.experiencia.imagen = this.imagenService.urlExp;
     this.experienciaService.update(id, this.experiencia).subscribe(
       data => {

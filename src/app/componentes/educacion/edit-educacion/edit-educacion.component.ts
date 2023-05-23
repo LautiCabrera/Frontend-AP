@@ -35,12 +35,9 @@ export class EditEducacionComponent implements OnInit {
   Actualizar(): void{
     const id = this.activatedRouter.snapshot.params['id'];
     this.educacion.imagen = this.imagenService.urlEdu;
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
     this.educacionService.update(id, this.educacion).subscribe(
       data => {
         this.router.navigate(['']);
-        window.scrollTo(scrollX, scrollY);
       }, err =>{ 
          alert("Error al modificar educación");
          this.router.navigate(['']);
@@ -48,7 +45,7 @@ export class EditEducacionComponent implements OnInit {
     );
   }
 
-  uploadImagen($event:any){
+  uploadImagen($event:any){ 
     const id = this.activatedRouter.snapshot.params['id'];
     const name = "edu_" + id;
     this.imagenService.uploadImagenEdu($event, name);

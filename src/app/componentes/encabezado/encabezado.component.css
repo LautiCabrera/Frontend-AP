@@ -29,9 +29,31 @@
   margin-top: 400px; 
 }
 
+@media (max-width:390px){
+  .menu-expanded{
+    margin-top: 450px;
+  }
+}
+
 @media (min-width: 601px) and (max-width:990px){
   .menu-expanded{
     margin-top: 270px;
+  }
+}
+
+.title{
+  height: 92px;
+}
+
+@media (max-width:600px){
+  .title{
+    height: 15px;
+  }
+}
+
+@media (min-width: 601px) and (max-width:1000px){
+  .title{
+    height: 42px;
   }
 }
 
@@ -56,9 +78,6 @@ ul.navbar-nav{
 }
 
 @media (max-width: 390px){
-  h2{
-    padding-top: 50px;
-  }
   .navbar-toggler{
     margin-top: 10px;
   }
