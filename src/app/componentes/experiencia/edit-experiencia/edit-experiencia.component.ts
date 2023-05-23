@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Experiencia } from 'src/app/model/experiencia';
 import { ExperienciaService } from 'src/app/service/experiencia.service';
 import { ImagenesService } from 'src/app/service/imagenes.service';
-import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage'
+import { Storage } from '@angular/fire/storage'
 
 @Component({
   selector: 'app-edit-experiencia',
@@ -15,6 +15,7 @@ export class EditExperienciaComponent implements OnInit {
 
   experiencia: Experiencia = new Experiencia("","","","","");
   imagenUrl: String;
+  public imagenSeleccionada = false;
 
   constructor(private experienciaService: ExperienciaService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage) { }
 
@@ -29,13 +30,11 @@ export class EditExperienciaComponent implements OnInit {
         this.router.navigate(['']);
       }
     );
-    this.getImagenes('');
   }
 
   Actualizar(): void{
     const id = this.activatedRouter.snapshot.params['id'];
-    this.experiencia.imagen = this.imagenService.urlExp;
-    this.experienciaService.update(id, this.experiencia).subscribe(
+    this.experienciaService.update(id, { ...this.experiencia, imagen: this.imagenService.urlExp }).subscribe(
       data => {
         this.router.navigate(['']);
       }, err =>{
@@ -49,16 +48,7 @@ export class EditExperienciaComponent implements OnInit {
     const id = this.activatedRouter.snapshot.params['id'];
     const name = "exp_" + id;
     this.imagenService.uploadImagenExp($event, name);
-  }
-   
-  getImagenes(_name: String) {
-    const imagesRef = ref(this.storage, `Experiencia/`);
-    listAll(imagesRef)
-    .then(async response => {
-      for(let item of response.items){
-          this.imagenUrl = await getDownloadURL(item);
-        }
-      }).catch(error => console.log(error));     
+    this.imagenSeleccionada = true;
   }
 
   Cancel(){

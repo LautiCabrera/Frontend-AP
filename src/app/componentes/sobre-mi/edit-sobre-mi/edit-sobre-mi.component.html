@@ -1,7 +1,7 @@
 <div class="full-page">
     <div class="container" *ngIf="persona">
         <div class="row">
-            <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+            <form (ngSubmit)="Actualizar()" novalidate #f="ngForm">
                 <div class="form-group">
                     <label for="descripcion">Descripción:</label>
                     <textarea type="text" style="height: 100;" class="form-control" id="apellido" name="apellido"
@@ -13,7 +13,7 @@
                         (change)="uploadImagen($event)" accept=".jpg, .jpeg, .png">
                 </div><br>
                 <div class="imagen" align="center">
-                    <img [src]="imagenService.urlPer" width="200">
+                    <img [src]="imagenSeleccionada ? imagenService.urlPer : 'assets/profile.png'" width="200">
                 </div><br>
                 <div align="center">
                     <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>

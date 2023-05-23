@@ -3,8 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Persona } from 'src/app/model/persona.model';
 import { PersonaService } from 'src/app/service/persona.service';
 import { ImagenesService } from 'src/app/service/imagenes.service';
-import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage';
-import { ModalesService } from 'src/app/service/modales.service';
+import { Storage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-edit-sobre-mi',
@@ -16,8 +15,9 @@ export class EditSobreMiComponent implements OnInit {
 
   persona: Persona = new Persona("","","","","");
   imagenUrl: String;
+  public imagenSeleccionada = false;
 
-  constructor(private personaService: PersonaService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
+  constructor(private personaService: PersonaService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage) { }
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
@@ -29,13 +29,11 @@ export class EditSobreMiComponent implements OnInit {
         this.router.navigate(['']);
       }
     );
-    this.getImagenes('');  
   } 
 
-  onUpdate(): void {
+  Actualizar(): void {
     const id = this.activatedRouter.snapshot.params['id'];
-    this.persona.imagen = this.imagenService.urlPer;
-    this.personaService.actualizar(id, this.persona).subscribe(
+    this.personaService.actualizar(id, { ...this.persona, imagen: this.imagenService.urlPer }).subscribe(
       data =>{
         this.router.navigate(['']);
       }, err =>{
@@ -49,20 +47,10 @@ export class EditSobreMiComponent implements OnInit {
     const id = this.activatedRouter.snapshot.params['id'];
     const name = "perfil_"+ id;
     this.imagenService.uploadImagenPer($event, name);
-  }
-    
-  getImagenes(_name: String) {
-    const imagesRef = ref(this.storage, `perfil/`);
-    listAll(imagesRef)
-    .then(async response => {
-      for(let item of response.items){
-          this.imagenUrl = await getDownloadURL(item);
-        }
-      }).catch(error => console.log(error))      
+    this.imagenSeleccionada = true;
   }
   
   Cancel(){
-    this.modalSS.$modal.emit(false);
     this.router.navigate(['']);
   }
 

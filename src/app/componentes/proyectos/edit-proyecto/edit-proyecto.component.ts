@@ -3,8 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Proyectos } from 'src/app/model/proyectos';
 import { ProyectoService } from 'src/app/service/proyecto.service';
 import { ImagenesService } from 'src/app/service/imagenes.service';
-import { ModalesService } from 'src/app/service/modales.service';
-import { Storage, getDownloadURL, listAll, ref} from '@angular/fire/storage';
+import { Storage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-edit-proyecto',
@@ -16,8 +15,9 @@ export class EditProyectoComponent implements OnInit {
 
   proyecto: Proyectos = new Proyectos("","","","","");
   imagenUrl: String;
+  public imagenSeleccionada = false;
 
-  constructor(private proyectoService: ProyectoService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage, private modalSS: ModalesService) { }
+  constructor(private proyectoService: ProyectoService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage) { }
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
@@ -30,13 +30,11 @@ export class EditProyectoComponent implements OnInit {
         this.router.navigate(['']);
       }
     );
-    this.getImagenes('');
   }
 
   Actualizar(): void{
     const id = this.activatedRouter.snapshot.params['id'];
-    this.proyecto.imagen = this.imagenService.urlProy;
-    this.proyectoService.update(id, this.proyecto).subscribe(
+    this.proyectoService.update(id, { ...this.proyecto, imagen: this.imagenService.urlProy }).subscribe(
       data => {
         this.router.navigate(['']);
       }, err =>{ 
@@ -50,20 +48,10 @@ export class EditProyectoComponent implements OnInit {
     const id = this.activatedRouter.snapshot.params['id'];
     const name = "proyecto_"+ id;
     this.imagenService.uploadImagenProy($event, name);
-  }
-
-  getImagenes(_name: String) {
-    const imagesRef = ref(this.storage, `Proyecto/`);
-    listAll(imagesRef)
-    .then(async response => {
-      for(let item of response.items){
-          this.imagenUrl = await getDownloadURL(item);
-        }
-      }).catch(error => console.log(error))      
+    this.imagenSeleccionada = true;
   }
   
   Cancel(){
-    this.modalSS.$modal.emit(false);
     this.router.navigate(['']);
   }  
 

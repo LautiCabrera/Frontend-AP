@@ -29,7 +29,7 @@
                             (change)="uploadImagen($event)" accept=".jpg, .jpeg, .png">
                     </div><br>
                     <div class="imagen" align="center">
-                        <img [src]="imagenService.urlExp" width="200">
+                        <img [src]="imagenSeleccionada ? imagenService.urlExp : 'assets/upload.jpg'" width="200">
                     </div><br>
                     <div align="center">
                         <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
