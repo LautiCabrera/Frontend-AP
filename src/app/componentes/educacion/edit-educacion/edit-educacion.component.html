@@ -1,39 +1,36 @@
-<div class="full-page">
-    <div class="container" *ngIf="educacion">
-        <div class="row">
-            <form (ngSubmit)="Actualizar()" novalidate #f="ngForm">
-                <div class="form-group">
-                    <label for="nombre">Nombre del estudio:</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="educacion.nombre"
-                        required>
-                </div><br>
-                <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
-                    <textarea type="text" style="height: 100;" class="form-control" id="descripcion" name="descripcion"
-                        [(ngModel)]="educacion.descripcion" required></textarea>
-                </div><br>
-                <div class="form-group">
-                    <label for="duracion">Duracion:</label>
-                    <input type="text" class="form-control" id="duracion" name="duracion"
-                        [(ngModel)]="educacion.duracion" required>
-                </div><br>
-                <div class="form-group">
-                    <label for="duracion">Link de interés:</label>
-                    <input type="text" class="form-control" id="info" name="info" [(ngModel)]="educacion.info" required>
-                </div><br>
-                <div class="form-group">
-                    <label for="img">Imagen:</label>
-                    <input type="file" class="form-control" id="img" name="img" [(ngModel)]="imagenUrl"
-                        (change)="uploadImagen($event)" accept=".jpg, .jpeg, .png">
-                </div><br>
-                <div class="imagen" align="center">
-                    <img [src]="imagenSeleccionada ? imagenService.urlEdu : 'assets/upload.jpg'" width="200">
-                </div><br>
-                <div align="center">
-                    <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
-                    <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
-                </div>
-            </form>
-        </div>
+<div class="container" *ngIf="education">
+    <div class="row">
+        <form (ngSubmit)="update()" novalidate #f="ngForm">
+            <div class="form-group">
+                <label for="name">Nombre del estudio y/o certificación:</label>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="education.name" required>
+            </div><br>
+            <div class="form-group">
+                <label for="description">Descripción del contenido:</label>
+                <textarea type="text" class="form-control" id="description" name="description"
+                    [(ngModel)]="education.description" required></textarea>
+            </div><br>
+            <div class="form-group">
+                <label for="duration">Duración (mes o meses y año):</label>
+                <input type="text" class="form-control" id="duration" name="duration" [(ngModel)]="education.duration"
+                    required>
+            </div><br>
+            <div class="form-group">
+                <label for="duration">Link de interés:</label>
+                <input type="text" class="form-control" id="info" name="info" [(ngModel)]="education.info" required>
+            </div><br>
+            <div class="form-group">
+                <label for="img">Imagen o logotipo de la academia:</label>
+                <input type="file" class="form-control" id="img" name="img" [(ngModel)]="education.image"
+                    (change)="uploadImage($event)" accept=".jpg, .jpeg, .png, .svg">
+            </div><br>
+            <div class="d-flex justify-content-center">
+                <img [src]="selectedImage ? imageService.urlEdu : education.image" width="200">
+            </div><br>
+            <div class="d-flex justify-content-center">
+                <button class="btn p-btn m-4" type="button" routerLink="/educations">Cancelar</button>
+                <button class="btn p-btn m-4">Actualizar</button>
+            </div>
+        </form>
     </div>
 </div>

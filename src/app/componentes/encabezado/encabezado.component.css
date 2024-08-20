@@ -1,188 +1,104 @@
-.cointer-fluid{
-  width: 1074px;
-  margin-left: 0px;
-}
-
-@media (max-width: 600px){
-  .navbar>.container-fluid{
-    justify-content:center;
-  }
-}
-
-@media (max-width: 600px){
-  .container-lg{
-    margin-top: 100px;
-  }
-}
-
-.row{
+.row {
   height: 140px;
 }
 
-@media (max-width: 600px){
-  .row{
+@media (max-width: 600px) {
+  .row {
     height: 0px;
   }
 }
 
-.menu-expanded {
-  margin-top: 400px; 
-}
-
-@media (max-width:390px){
-  .menu-expanded{
-    margin-top: 450px;
-  }
-}
-
-@media (min-width: 601px) and (max-width:990px){
-  .menu-expanded{
-    margin-top: 270px;
-  }
-}
-
-.title{
+.title {
   height: 92px;
 }
 
-@media (max-width:600px){
-  .title{
+@media (max-width: 600px) {
+  .title {
     height: 15px;
   }
 }
 
-@media (min-width: 601px) and (max-width:1000px){
-  .title{
+@media (min-width: 601px) and (max-width: 1000px) {
+  .title {
     height: 42px;
   }
 }
 
-.header-nav{ 
-  height: 65px;
-}
-
-@media (max-width: 600px){
-  .header-nav{ 
-    height: 65px;
-  }
-}
-
-@media (max-width: 600px){
-  .col-header-nav{ 
-    height: 65px;
-  }
-}
-
-ul.navbar-nav{
-  width: 760px;
-}
-
-@media (max-width: 390px){
-  .navbar-toggler{
+@media (max-width: 390px) {
+  .navbar-toggler {
     margin-top: 10px;
   }
 }
 
-@media (min-width: 990px) and (max-width:1090px){
-  .navbar-brand{
-    display: none;
+.navbar {
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 1rem 0;
+}
+
+.container-fluid {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+}
+
+.navbar-toggler i {
+  color: var(--font-color);
+  font-size: 28px;
+}
+
+li {
+  align-items: center;
+  padding: 10px;
+  height: 50px;
+  list-style: none;
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.links a {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  position: relative;
+  text-decoration: none;
+  color: var(--font-color);
+  cursor: pointer;
+}
+
+.links a::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -3px;
+  background-color: var(--font-color);
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (min-width: 992px) {
+  .links a:hover::before,
+  .links a.active::before {
+      width: 100% !important;
   }
 }
 
-.btn{
-  background-color: var(--primary) !important; 
+.theme-toggler {
+  background: var(--content-bg);
+  color: var(--font-color);
+  padding: 0rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  transition-duration: 0.2s;
+  border: none;
 }
 
-.btn{
-    width: 150px; 
-    background-size: cover;
-}
-
-@media (max-width: 600px) {
-    .navbar{
-      justify-content:center;
-    }
-}
-
-.main-menu[_ngcontent-vtp-c14] {
-    align-items: center;
-    padding: 10px;
-    height: 50px;
-    margin-bottom: 0;
-    margin-right: 100px;
-    display: inline-flex;
-}
-
-@media (max-width: 1190px){
-    .main-menu[_ngcontent-vtp-c14]{
-        margin-right:0px;
-    }
-}
-
-li.main-menu__item{
-  width: 50px;
-  padding-left: 10px;
-}
-
-li{
-    width: 100px;
-    align-items: center;
-    color: white;
-    padding: 10px;
-    height: 50px;
-    list-style: none;
-    display: inline-flex;
-    flex-direction: row;
-}
-
-@import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
-
-.hit-the-floor {
-  text-shadow: 0 0 5px #6052FF, 0 0 15px #6052FF, 0 0 20px #6052FF, 0 0 40px #6052FF, 0 0 60px #00b7ff, 0 0 10px #8f83fd, 0 0 98px #00b7ff;
-    color: #bde3fc;
-  text-align: center;
-  animation: blink 5s infinite;
-  -webkit-animation: blink 12s infinite;
-}
-
-@-webkit-keyframes blink {
-  20%,
-  24%,
-  55% {
-    color: #111;
-    text-shadow: none;
-  }
-
-  0%,
-  19%,
-  21%,
-  23%,
-  25%,
-  54%,
-  56%,
-  100% {
-    text-shadow: 0 0 5px #6052FF, 0 0 15px #6052FF, 0 0 20px #6052FF, 0 0 40px #6052FF, 0 0 60px #00b7ff, 0 0 10px #8f83fd, 0 0 98px #00b7ff;
-    color: #bde3fc;
-  }
-}
-
-@keyframes blink {
-  20%,
-  24%,
-  55% {
-    color: #111;
-    text-shadow: none;
-  }
-
-  0%,
-  19%,
-  21%,
-  23%,
-  25%,
-  54%,
-  56%,
-  100% {
-      text-shadow: 0 0 5px #6052FF, 0 0 15px #6052FF, 0 0 20px #6052FF, 0 0 40px #6052FF, 0 0 60px #00b7ff, 0 0 10px #8f83fd, 0 0 98px #00b7ff;
-      color: #bde3fc;
-  }
+.theme-toggler:hover {
+  background: var(--muted);
+  color: var(--bg);
 }

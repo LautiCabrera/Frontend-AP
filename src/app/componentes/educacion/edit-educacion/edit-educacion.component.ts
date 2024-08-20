@@ -1,58 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Educacion } from 'src/app/model/educacion';
-import { EducacionService } from 'src/app/service/educacion.service';
-import { ImagenesService } from 'src/app/service/imagenes.service';
-import { Storage } from '@angular/fire/storage'
+import { ActivatedRoute } from '@angular/router';
+import { Education } from 'src/app/model/education';
+import { CrudService } from 'src/app/service/crud.service';
+import { EducationService } from 'src/app/service/education.service';
+import { ImagesService } from 'src/app/service/images.service';
 
 @Component({
   selector: 'app-edit-educacion',
   templateUrl: './edit-educacion.component.html',
   styleUrls: ['./edit-educacion.component.css'],
 })
-
 export class EditEducacionComponent implements OnInit {
 
-  educacion: Educacion = new Educacion("","","","","");
-  imagenUrl: String;
-  public imagenSeleccionada = false;
+  education: Education = new Education("", "", "", "", "");
+  public selectedImage = false;
+  private id!: number;
 
-  constructor(private educacionService: EducacionService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage) { }
+  constructor(
+    private educationService: EducationService,
+    private activatedRouter: ActivatedRoute,
+    public imageService: ImagesService,
+    private crudService: CrudService
+  ) { }
 
   ngOnInit(): void {
-    const id = this.activatedRouter.snapshot.params['id'];
-    window.scrollTo(0, 0);
-    this.educacionService.detalle(id).subscribe(
-      data => {
-        this.educacion = data;
-      }, err => {
-        alert("Error al modificar educación");
-        this.router.navigate(['']);
+    this.id = this.activatedRouter.snapshot.params['id'];
+    this.loadEducation();
+  }
+
+  loadEducation(): void {
+    this.crudService.handleSingleDataLoad(
+      this.id, this.educationService.detail.bind(this.educationService), (data) => {
+        this.education = data;
       }
     );
   }
 
-  Actualizar(): void{
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.educacionService.update(id, { ...this.educacion, imagen: this.imagenService.urlEdu }).subscribe(
-      data => {
-        this.router.navigate(['']);
-      }, err =>{ 
-         alert("Error al modificar educación");
-         this.router.navigate(['']);
-      }
+  update(): void {
+    this.education.image = this.selectedImage ? this.imageService.urlEdu : this.education.image;
+    this.crudService.handleUpdate(
+      this.educationService.update(this.id, this.education),
+      'Educación modificada con éxito.',
+      'Error al modificar educación.'
     );
   }
 
-  uploadImagen($event:any){ 
-    const id = this.activatedRouter.snapshot.params['id'];
-    const name = "edu_" + id; 
-    this.imagenService.uploadImagenEdu($event, name);
-    this.imagenSeleccionada = true;
+  uploadImage($event: any) {
+    const name = "edu_" + this.id;
+    this.imageService.uploadImage($event, name, "Education");
+    this.selectedImage = true;
   }
-
-  Cancel(){
-    this.router.navigate(['']);
-  }  
 
 }

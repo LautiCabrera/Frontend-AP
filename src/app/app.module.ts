@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PersonaService } from './service/persona.service';
+import { PersonService } from './service/person.service';
 import { environment } from 'src/environments/environments';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
@@ -29,6 +29,7 @@ import { initializeApp } from "firebase/app";
 import { provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
@@ -42,6 +43,8 @@ import { EditEncabezadoComponent } from './componentes/encabezado/edit-encabezad
 import { EditProyectoComponent } from './componentes/proyectos/edit-proyecto/edit-proyecto.component';
 import { NewProyectoComponent } from './componentes/proyectos/new-proyecto/new-proyecto.component';
 import { LoadingSpinnerComponent } from './componentes/loading-spinner/loading-spinner.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import { LoadingSpinnerComponent } from './componentes/loading-spinner/loading-s
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    ClipboardModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideStorage(() => getStorage()),
     provideAuth(() => getAuth()),
@@ -87,7 +93,8 @@ import { LoadingSpinnerComponent } from './componentes/loading-spinner/loading-s
     providePerformance(() => getPerformance()),
     provideRemoteConfig(() => getRemoteConfig())
   ],
-  providers: [PersonaService, interceptorProvider, ScreenTrackingService,UserTrackingService],
+  providers: [PersonService, interceptorProvider, ScreenTrackingService,UserTrackingService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

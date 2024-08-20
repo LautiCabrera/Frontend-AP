@@ -1,57 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Persona } from 'src/app/model/persona.model';
-import { PersonaService } from 'src/app/service/persona.service';
-import { ImagenesService } from 'src/app/service/imagenes.service';
-import { Storage } from '@angular/fire/storage';
+import { ActivatedRoute } from '@angular/router';
+import { Person } from 'src/app/model/person.model';
+import { ImagesService } from 'src/app/service/images.service';
+import { PersonService } from 'src/app/service/person.service';
+import { CrudService } from 'src/app/service/crud.service';
 
 @Component({
   selector: 'app-edit-sobre-mi',
   templateUrl: './edit-sobre-mi.component.html',
   styleUrls: ['./edit-sobre-mi.component.css']
 })
-
 export class EditSobreMiComponent implements OnInit {
 
-  persona: Persona = new Persona("","","","","");
-  imagenUrl: String;
-  public imagenSeleccionada = false;
+  person: Person = new Person("", "", "", "", "");
+  public selectedImage = false;
+  private id!: number;
 
-  constructor(private personaService: PersonaService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage) { }
+  constructor(
+    private personService: PersonService,
+    private activatedRouter: ActivatedRoute,
+    public imageService: ImagesService,
+    private crudService: CrudService
+  ) { }
 
   ngOnInit(): void {
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.personaService.detalle(id).subscribe(
-      data => {
-        this.persona = data;
-      }, err => {
-        alert("Error al modificar");
-        this.router.navigate(['']);
+    this.id = this.activatedRouter.snapshot.params['id'];
+    this.loadPerson();
+  }
+
+  loadPerson(): void {
+    this.crudService.handleSingleDataLoad(
+      this.id, this.personService.detail.bind(this.personService), (data) => {
+        this.person = data;
       }
     );
-  } 
-
-  Actualizar(): void {
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.personaService.actualizar(id, { ...this.persona, imagen: this.imagenService.urlPer }).subscribe(
-      data =>{
-        this.router.navigate(['']);
-      }, err =>{
-        alert("Error al modificar persona");
-        this.router.navigate(['']);
-      }
-    );  
   }
 
-  uploadImagen($event:any){
-    const id = this.activatedRouter.snapshot.params['id'];
-    const name = "perfil_"+ id;
-    this.imagenService.uploadImagenPer($event, name);
-    this.imagenSeleccionada = true;
+  update(): void {
+    this.person.image = this.selectedImage ? this.imageService.urlPer : this.person.image;
+    this.crudService.handleUpdate(
+      this.personService.update(this.id, this.person),
+      'Información personal modificada con éxito.',
+      'Error al modificar información personal.'
+    );
   }
-  
-  Cancel(){
-    this.router.navigate(['']);
+
+  uploadImage($event: any) {
+    const name = "perfil_" + this.id;
+    this.imageService.uploadImage($event, name, "Person");
+    this.selectedImage = true;
   }
 
 }

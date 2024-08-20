@@ -1,49 +1,38 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Educacion } from 'src/app/model/educacion';
-import { EducacionService } from 'src/app/service/educacion.service';
-import { ModalesService } from 'src/app/service/modales.service';
+import { Education } from 'src/app/model/education';
+import { CrudService } from 'src/app/service/crud.service';
+import { EducationService } from 'src/app/service/education.service';
+import { ImagesService } from 'src/app/service/images.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-new-educacion',
   templateUrl: './new-educacion.component.html',
   styleUrls: ['./new-educacion.component.css']
 })
-
 export class NewEducacionComponent {
-  
-  nombre: String;
-  descripcion: String;
-  duracion: String;
-  imagenUrl: String;
-  info: String;
 
-  constructor(private educacionService: EducacionService, private router: Router, private modalSS: ModalesService) { }
+  education: Education = new Education("", "", "", "", "");
+  public selectedImage = false;
 
-  ngOnInit(): void {
-  }
- 
-  Guardar(): void{
-    const educacion = new Educacion(this.nombre, this.descripcion, this.duracion, this.imagenUrl, this.info);
-    this.educacionService.save(educacion).subscribe(
-      data =>{
-        alert("Educación añadida con éxito");
-        this.modalSS.$modal.emit(false);
-        const scrollX = window.scrollX;
-        const scrollY = window.scrollY;
-        window.location.reload();
-        window.scrollTo(scrollX, scrollY);
-        this.router.navigate(['']);
-      }, err =>{
-        alert("Fallo al añadir educación");
-        this.modalSS.$modal.emit(false);
-      }
+  constructor(
+    private educationService: EducationService,
+    private crudService: CrudService,
+    public imageService: ImagesService
+  ) { }
+
+  save(): void {
+    this.crudService.handleSave(
+      this.educationService.save(this.education), '¡Educación añadida con éxito!', 'Error al añadir educación'
     );
+    location.reload();
   }
 
-  Cancel(){
-    this.modalSS.$modal.emit(false);
-    this.router.navigate(['']);
-  }  
+  uploadImage($event: any) {
+    const uuid = uuidv4();
+    const name = "/New/edu_" + uuid;
+    this.imageService.uploadImage($event, name, "Education");
+    this.selectedImage = true;
+  }
 
 }

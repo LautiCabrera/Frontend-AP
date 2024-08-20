@@ -1,49 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Habilidades } from 'src/app/model/habilidades';
-import { HabilidadesService } from 'src/app/service/habilidades.service';
+import { ActivatedRoute } from '@angular/router';
+import { Skill } from 'src/app/model/skill';
+import { CrudService } from 'src/app/service/crud.service';
+import { ImagesService } from 'src/app/service/images.service';
+import { SkillService } from 'src/app/service/skill.service';
 
 @Component({
   selector: 'app-edit-habilidad',
   templateUrl: './edit-habilidad.component.html',
   styleUrls: ['./edit-habilidad.component.css']
 })
-
 export class EditHabilidadComponent implements OnInit {
 
-  habilidad: Habilidades = null;
+  skill: Skill = new Skill("", "");
+  public selectedImage = false;
+  private id!: number;
 
   constructor(
-    private habilidadService: HabilidadesService,
+    private skillService: SkillService,
     private activatedRouter: ActivatedRoute,
-    private router: Router) { }
+    public imageService: ImagesService,
+    private crudService: CrudService
+  ) { }
 
   ngOnInit(): void {
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.habilidadService.detail(id).subscribe(
-      data => {
-        this.habilidad = data;
-      }, err => {
-        alert("Error al modificar");
-        this.router.navigate(['']);
-      }
-    )
+    this.id = this.activatedRouter.snapshot.params['id'];
+    this.loadSkill();
   }
 
-  Actualizar(){
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.habilidadService.update(id, this.habilidad).subscribe(
-      data => {
-        this.router.navigate(['']);
-      }, err => {
-        alert("Error al modificar la skill");
-        this.router.navigate(['']);
+  loadSkill(): void {
+    this.crudService.handleSingleDataLoad(
+      this.id, this.skillService.detail.bind(this.skillService), (data) => {
+        this.skill = data;
       }
-    )
+    );
   }
 
-  Cancel(){
-    this.router.navigate(['']);
+  update(): void {
+    this.skill.icon = this.selectedImage ? this.imageService.urlSkill : this.skill.icon;
+    this.crudService.handleUpdate(
+      this.skillService.update(this.id, this.skill),
+      'Habilidad modificada con éxito.',
+      'Error al modificar habilidad.'
+    );
+  }
+
+  uploadImage($event: any) {
+    const name = "skill_" + this.id;
+    this.imageService.uploadImage($event, name, "Skill");
+    this.selectedImage = true;
   }
 
 }

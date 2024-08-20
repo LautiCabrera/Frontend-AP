@@ -1,41 +1,45 @@
-<section id="experiencia">
-    <div class="container-fluid background-grey">
-        <div class="container py-4 contenedor">
-            <h2 class="display-6 mb-3 h2-lines">Experiencia</h2><br>
-            <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#itemPlus">
-                <i *ngIf="isLogged" (click)="openNewExp()" type="button" class="bi bi-plus-circle"></i>
-            </span>
-            <div *ngIf="modalExpNew == true"><app-new-experiencia></app-new-experiencia></div>
+<app-encabezado></app-encabezado>
+<div *ngIf="modalExpNew == true" [@expandCollapse]><app-new-experiencia></app-new-experiencia></div>
+<div class="d-flex flex-column align-items-center mt-4">
+    <span class="edit-icon">
+        <i *ngIf="isLogged" (click)="toggleNewExp()" type="button" [class.bi-plus-circle]="!isIconChanged"
+            [class.bi-x-circle]="isIconChanged"></i>
+    </span>
+</div>
+<section id="experience">
+    <div class="container-fluid d-flex align-items-center">
+        <div class="container py-4 contenedor d-flex flex-column align-items-center">
             <ul class="row justify-content-center list-unstyled mt-3">
-                <li class="col-12 card mb-3" *ngFor="let experiencia of experiencia">
+                <li class="col-12 card mb-3 effect" *ngFor="let experience of experience.slice().reverse()" [@zoomIn]>
                     <div class="row g-0">
                         <div class="col-md-4 d-flex align-items-center">
                             <div class="edu-img">
-                                <img src={{experiencia.imagen}} alt="Exp" class="img-fluid">
+                                <img src={{experience.image}} alt="AP" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h4 class="card-title display-6 text-center">{{experiencia.nombre}}</h4>
-                                <p style="text-align:justify;" class="card-text fs-4">{{experiencia.descripcion}}</p>
+                                <h4 class="card-title display-6 text-center">{{experience.name}}</h4>
+                                <p class="card-text fs-4 align-items-center">{{experience.description}}</p>
                                 <div class="row justify-content-between">
                                     <div class="col-md">
-                                        <p class="fs-4 mobile">
-                                            <span class="fw-bolder">Duración:</span> {{experiencia.duracion}}
+                                        <p class="fs-4 ">
+                                            <span class="fw-bolder">Duración:</span>
+                                            {{experience.duration}}
                                         </p>
                                     </div>
                                     <div class="col-md text-center">
-                                        <a target="_blank" [href]=experiencia.info style="
-                                        margin-right: 20px;" class="btn btn-lg">Más info</a>
-                                        <span class="align-self-end edit-icon" data-bs-toggle="modal"
-                                            data-bs-target="#itemModal">
-                                            <i *ngIf="isLogged" routerLink="/editExp/{{experiencia.id}}"
-                                                class="bi bi-pencil-square"></i>
-                                        </span>
-                                        <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                            <i *ngIf="isLogged" (click)="delete(experiencia.id)"
-                                                class="bi bi-trash3"></i>
-                                        </span>
+                                        <a target="_blank" [href]=experience.info class="btn p-btn">Más info</a>
+                                        <div class="d-flex justify-content-end">
+                                            <span class="edit-icon m-2">
+                                                <i *ngIf="isLogged" (click)="delete(experience.id)"
+                                                    class="bi bi-trash3"></i>
+                                            </span>
+                                            <span class="edit-icon m-2">
+                                                <i *ngIf="isLogged" routerLink="/editExp/{{experience.id}}"
+                                                    class="bi bi-pencil-square"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,29 +1,10 @@
-.image {
-    min-height: 100vh;
-}
-
-.bg-image {
-    background-image: url('https://bootstrapious.com/i/snippets/sn-page-split/bg.jpg');
-    background-size: cover;
-    background-position: center center;
-}
-
-.login{
-    min-height: 100vh;
-    background-color: black;
-}
-
 .bg-light{
     padding-left: 0px;
     padding-right: 0px;
 }
 
-.row{
-    background-color: black;
-}
-
 h3, p, label{
-    color: white;
+    color: var(--font-color);
 }
 
 h3, p{

@@ -1,32 +1,30 @@
-<section id="habilidades" class="container-fluid background-grey">
-    <div class="container py-4 contenedor">
-        <h2 class="display-6 mb-3 h2-lines">Habilidades</h2>
-        <div class="row">
-            <div id="frontend" style="width: 1524px;" class="col-lg-4 mt-5">
-                <div class="skills-header d-flex justify-content-between align-items-center">
-                    <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#skillPlus">
-                        <i *ngIf="isLogged" (click)="openNewHab()" class="bi bi-plus-circle"></i>
-                    </span>
+<app-encabezado></app-encabezado>
+<div class="content">
+    <div *ngIf="modalHabNew == true" [@expandCollapse]><app-new-habilidad></app-new-habilidad><br></div>
+    <div class="d-flex flex-column align-items-center mt-4">
+        <span class="edit-icon">
+            <i *ngIf="isLogged" (click)="toggleNewHab()" type="button" [class.bi-plus-circle]="!isIconChanged"
+                [class.bi-x-circle]="isIconChanged"></i>
+        </span>
+    </div>
+    <section id="skill" class="tech sec-container my-5">
+        <div class="tech__list" [@zoomIn]>
+            <div class="tech__stack" *ngFor="let skill of skill" [@bounceIn]>
+                <div class="edu-img">
+                    <img src="{{skill.icon}}" alt="{{skill.name}}" title="{{skill.name}}" class="img-fluid">
                 </div>
-                <div *ngIf="modalHabNew == true"><app-new-habilidad></app-new-habilidad><br></div>
-                <div class="skill-item" *ngFor="let habilidad of habilidad">
-                    <div class="item-title d-flex justify-content-between align-items-center">
-                        <span class="fs-5">{{habilidad.nombre}}</span>
-                        <div class="item-buttons" *ngIf="isLogged">
-                            <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#skillEdit">
-                                <i routerLink="/editHab/{{habilidad.id}}" class="bi bi-pencil-square"></i>
-                            </span>
-                            <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                <i (click)="delete(habilidad.id)" class="bi bi-trash3"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="progress mb-3" style="height: 20px;">
-                        <div class="progress-bar progreso" style="color: #6052FF;" role="progressbar" aria-valuemin="0"
-                            aria-valuenow="95" aria-valuemax="100" [style.width]="habilidad.progreso + '%'"></div>
+                <div class="item-title d-flex justify-content-between align-items-center flex-column">
+                    <span class="fs-5">{{skill.name}}</span>
+                    <div class="item-buttons" *ngIf="isLogged">
+                        <span class="edit-icon">
+                            <i (click)="delete(skill.id)" class="bi bi-trash3"></i>
+                        </span>
+                        <span class="edit-icon">
+                            <i routerLink="/editHab/{{skill.id}}" class="bi bi-pencil-square"></i>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

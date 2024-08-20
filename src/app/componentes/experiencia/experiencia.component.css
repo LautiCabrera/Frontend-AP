@@ -1,17 +1,8 @@
-@media (max-width: 600px){
-    .container{
-        text-align: center;
-    }
-}
-
-@media (max-width: 600px){
-    .h2-lines{
-        left: 0rem;
-    }
-}
-
-@media (max-width: 600px){
-    .mobile{
-        text-align: left;
-    }
+.experience__container {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 820px), 1fr));
+    gap: 1.8rem;
+    text-align: justify;
 }

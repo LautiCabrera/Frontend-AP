@@ -1,58 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Experiencia } from 'src/app/model/experiencia';
-import { ExperienciaService } from 'src/app/service/experiencia.service';
-import { ImagenesService } from 'src/app/service/imagenes.service';
-import { Storage } from '@angular/fire/storage'
+import { ActivatedRoute } from '@angular/router';
+import { Experience } from 'src/app/model/experience';
+import { CrudService } from 'src/app/service/crud.service';
+import { ExperienceService } from 'src/app/service/experience.service';
+import { ImagesService } from 'src/app/service/images.service';
 
 @Component({
   selector: 'app-edit-experiencia',
   templateUrl: './edit-experiencia.component.html',
   styleUrls: ['./edit-experiencia.component.css']
 })
-
 export class EditExperienciaComponent implements OnInit {
 
-  experiencia: Experiencia = new Experiencia("","","","","");
-  imagenUrl: String;
-  public imagenSeleccionada = false;
+  experience: Experience = new Experience("", "", "", "", "");
+  public selectedImage = false;
+  private id!: number;
 
-  constructor(private experienciaService: ExperienciaService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage) { }
+  constructor(
+    private experienceService: ExperienceService,
+    private activatedRouter: ActivatedRoute,
+    public imageService: ImagesService,
+    private crudService: CrudService
+  ) { }
 
   ngOnInit(): void {
-    const id = this.activatedRouter.snapshot.params['id'];
-    window.scrollTo(0, 0);
-    this.experienciaService.detail(id).subscribe(
-      data => {
-        this.experiencia = data;
-      }, err => {
-        alert("Error al modificar experiencia");
-        this.router.navigate(['']);
+    this.id = this.activatedRouter.snapshot.params['id'];
+    this.loadExperience();
+  }
+
+  loadExperience(): void {
+    this.crudService.handleSingleDataLoad(
+      this.id, this.experienceService.detail.bind(this.experienceService), (data) => {
+        this.experience = data;
       }
     );
   }
 
-  Actualizar(): void{
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.experienciaService.update(id, { ...this.experiencia, imagen: this.imagenService.urlExp }).subscribe(
-      data => {
-        this.router.navigate(['']);
-      }, err =>{
-         alert("Error al modificar experiencia");
-         this.router.navigate(['']);
-      }
+  update(): void {
+    this.experience.image = this.selectedImage ? this.imageService.urlExp : this.experience.image;
+    this.crudService.handleUpdate(
+      this.experienceService.update(this.id, this.experience),
+      'Experiencia modificada con éxito.',
+      'Error al modificar experiencia.'
     );
   }
 
-  uploadImagen($event:any){
-    const id = this.activatedRouter.snapshot.params['id'];
-    const name = "exp_" + id;
-    this.imagenService.uploadImagenExp($event, name);
-    this.imagenSeleccionada = true;
+  uploadImage($event: any) {
+    const name = "exp_" + this.id;
+    this.imageService.uploadImage($event, name, "Experience");
+    this.selectedImage = true;
   }
-
-  Cancel(){
-    this.router.navigate(['']);
-  }  
 
 }

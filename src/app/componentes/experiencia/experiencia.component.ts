@@ -1,54 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { Experiencia } from 'src/app/model/experiencia';
-import { ExperienciaService } from 'src/app/service/experiencia.service';
-import { ModalesService } from 'src/app/service/modales.service';
+import { Component, Inject } from '@angular/core';
+import { expandCollapse, zoomIn } from 'src/app/animations/shared-animations';
+import { AppComponent } from 'src/app/app.component';
+import { Experience } from 'src/app/model/experience';
+import { CrudService } from 'src/app/service/crud.service';
+import { ExperienceService } from 'src/app/service/experience.service';
+import { NotificationService } from 'src/app/service/notification.service';
+import { PersonService } from 'src/app/service/person.service';
 import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-experiencia',
   templateUrl: './experiencia.component.html',
-  styleUrls: ['./experiencia.component.css']
+  styleUrls: ['./experiencia.component.css'],
+  animations: [
+    zoomIn,
+    expandCollapse
+  ]
 })
+export class ExperienciaComponent extends AppComponent {
 
-export class ExperienciaComponent implements OnInit {
+  experience: Experience[] = [];
+  modalExpNew = false;
+  isIconChanged = false;
 
-  modalExpNew: boolean;
-  modalExpEdit: boolean;
-  experiencia: Experiencia[] = []; 
-
-  constructor(private Experiencia: ExperienciaService, private tokenService: TokenService, private modalSS: ModalesService) { }
-
-  isLogged = false;
-
-  ngOnInit(): void {
-    this.cargarExperiencia();
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-      this.modalSS.$modal.subscribe((valor)=>{this.modalExpNew = valor});
-      this.modalSS.$modal.subscribe((valor)=>{this.modalExpEdit = valor});
-    } else {
-      this.isLogged = false;
-    }
+  constructor(
+    public experienceService: ExperienceService,
+    private crudService: CrudService,
+    public override notificationService: NotificationService,
+    public override personService: PersonService,
+    tokenService: TokenService,
+    @Inject('personId') protected override personId: number
+  ) {
+    super(notificationService, tokenService, personService, personId);
   }
 
-  cargarExperiencia(): void {
-    this.Experiencia.lista().subscribe(data => { this.experiencia = data; })
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.loadExperiences();
   }
 
-  delete(id?: number){
-    if(id != undefined){
-      this.Experiencia.delete(id).subscribe(
-        data => {
-          this.cargarExperiencia();
-        }, err => {
-          alert("No es posible eliminar la experiencia seleccionada");
-        }
-      )
-    }
+  loadExperiences(): void {
+    this.crudService.handleDataLoad(this.experienceService.list(), (data) => {
+      this.experience = data;
+    });
   }
 
-  openNewExp(){
-    this.modalExpNew = true;
+  delete(id?: number): void {
+    this.crudService.handleDelete(id, this.experienceService.delete.bind(this.experienceService), 'Experiencia eliminada con éxito.', this.loadExperiences.bind(this));
+  }
+
+  toggleNewExp() {
+    this.modalExpNew = !this.modalExpNew;
+    this.isIconChanged = !this.isIconChanged;
   }
 
 }

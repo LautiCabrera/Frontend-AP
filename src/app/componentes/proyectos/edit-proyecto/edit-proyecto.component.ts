@@ -1,58 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Proyectos } from 'src/app/model/proyectos';
-import { ProyectoService } from 'src/app/service/proyecto.service';
-import { ImagenesService } from 'src/app/service/imagenes.service';
-import { Storage } from '@angular/fire/storage';
+import { ActivatedRoute } from '@angular/router';
+import { Project } from 'src/app/model/proyect';
+import { ProjectService } from 'src/app/service/proyecto.service';
+import { ImagesService } from 'src/app/service/images.service';
+import { CrudService } from 'src/app/service/crud.service';
 
 @Component({
   selector: 'app-edit-proyecto',
   templateUrl: './edit-proyecto.component.html',
   styleUrls: ['./edit-proyecto.component.css']
 })
-
 export class EditProyectoComponent implements OnInit {
 
-  proyecto: Proyectos = new Proyectos("","","","","");
-  imagenUrl: String;
-  public imagenSeleccionada = false;
+  project: Project = new Project("", "", "", "", "", "");
+  public selectedImage = false;
+  private id!: number;
 
-  constructor(private proyectoService: ProyectoService, private activatedRouter: ActivatedRoute, private router: Router, public imagenService: ImagenesService, private storage: Storage) { }
+  constructor(
+    private projectService: ProjectService,
+    private activatedRouter: ActivatedRoute,
+    public imageService: ImagesService,
+    private crudService: CrudService
+  ) { }
 
   ngOnInit(): void {
-    const id = this.activatedRouter.snapshot.params['id'];
-    window.scrollTo(0, 0);
-    this.proyectoService.detail(id).subscribe(
-      data =>{
-        this.proyecto = data;
-      }, err =>{
-        alert("Error al modificar proyecto");
-        this.router.navigate(['']);
+    this.id = this.activatedRouter.snapshot.params['id'];
+    this.loadProject();
+  }
+
+  loadProject(): void {
+    this.crudService.handleSingleDataLoad(
+      this.id, this.projectService.detail.bind(this.projectService), (data) => {
+        this.project = data;
       }
     );
   }
 
-  Actualizar(): void{
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.proyectoService.update(id, { ...this.proyecto, imagen: this.imagenService.urlProy }).subscribe(
-      data => {
-        this.router.navigate(['']);
-      }, err =>{ 
-         alert("Error al modificar proyecto");
-         this.router.navigate(['']);
-      }
-    )
+  update(): void {
+    this.project.image = this.selectedImage ? this.imageService.urlProj : this.project.image;
+    this.crudService.handleUpdate(
+      this.projectService.update(this.id, this.project),
+      'Proyecto modificado con éxito.',
+      'Error al modificar proyecto.'
+    );
   }
 
-  uploadImagen($event:any){
-    const id = this.activatedRouter.snapshot.params['id'];
-    const name = "proyecto_"+ id;
-    this.imagenService.uploadImagenProy($event, name);
-    this.imagenSeleccionada = true;
+  uploadImage($event: any) {
+    const name = "project_" + this.id;
+    this.imageService.uploadImage($event, name, "Project");
+    this.selectedImage = true;
   }
-  
-  Cancel(){
-    this.router.navigate(['']);
-  }  
 
 }

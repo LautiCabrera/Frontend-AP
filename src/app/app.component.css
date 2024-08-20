@@ -1,0 +1,17 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 90vh;
+    background: url('../assets/gradient.svg');
+    background-position: top;
+    overflow: hidden;
+    margin-top: 10vh;
+}

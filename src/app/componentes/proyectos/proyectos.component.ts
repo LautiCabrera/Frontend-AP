@@ -1,60 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Proyectos } from 'src/app/model/proyectos';
-import { ModalesService } from 'src/app/service/modales.service';
-import { ProyectoService } from 'src/app/service/proyecto.service';
+import { Component, Inject } from '@angular/core';
+import { expandCollapse, zoomIn } from 'src/app/animations/shared-animations';
+import { AppComponent } from 'src/app/app.component';
+import { Project } from 'src/app/model/proyect';
+import { CrudService } from 'src/app/service/crud.service';
+import { NotificationService } from 'src/app/service/notification.service';
+import { PersonService } from 'src/app/service/person.service';
+import { ProjectService } from 'src/app/service/proyecto.service';
 import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-proyectos',
   templateUrl: './proyectos.component.html',
-  styleUrls: ['./proyectos.component.css']
+  styleUrls: ['./proyectos.component.css'],
+  animations: [
+    zoomIn,
+    expandCollapse
+  ]
 })
+export class ProyectosComponent extends AppComponent {
 
-export class ProyectosComponent implements OnInit {
+  modalProjNew: boolean;
+  projects: Project[] = [];
+  isIconChanged = false;
 
-  modalProyNew: boolean;
-  modalProyEdit: boolean;
-  proyectos: Proyectos[] = [];
-
-  constructor(private Proyectos: ProyectoService, private router: Router, private tokenService: TokenService, private modalSS: ModalesService) { }
-
-  isLogged = false;
-
-  ngOnInit(): void {
-
-    this.cargarProyectos();
-    if (this.tokenService.getToken()){
-      this.isLogged = true;
-      this.modalSS.$modal.subscribe((valor)=>{this.modalProyNew = valor});
-      this.modalSS.$modal.subscribe((valor)=>{this.modalProyEdit = valor});
-    } else {
-      this.isLogged = false;
-    } 
+  constructor(
+    private projectService: ProjectService,
+    private crudService: CrudService,
+    public override notificationService: NotificationService,
+    public override personService: PersonService,
+    tokenService: TokenService,
+    @Inject('personId') protected override personId: number
+  ) {
+    super(notificationService, tokenService, personService, personId);
   }
 
-  cargarProyectos(): void{
-    this.Proyectos.lista().subscribe(data =>{ this.proyectos = data; });
-  } 
-
-  delete(id?: number){
-    if(id != undefined){
-      this.Proyectos.delete(id).subscribe(
-        data => {
-          this.cargarProyectos();
-        }, err => {
-          alert("No fue posible eliminar el proyecto");
-        }
-      )
-    }
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.loadProjects();
   }
 
-  openNewProy(){
-    this.modalProyNew = true;
+  loadProjects(): void {
+    this.crudService.handleDataLoad(this.projectService.list(), (data) => {
+      this.projects = data;
+    });
   }
 
-  openEditProy(){
-    this.modalProyEdit = true;
+  delete(id?: number): void {
+    this.crudService.handleDelete(id, this.projectService.delete.bind(this.projectService), 'Proyecto eliminado con éxito.', this.loadProjects.bind(this));
+  }
+
+  toggleNewHab() {
+    this.modalProjNew = !this.modalProjNew;
+    this.isIconChanged = !this.isIconChanged;
   }
 
 } 

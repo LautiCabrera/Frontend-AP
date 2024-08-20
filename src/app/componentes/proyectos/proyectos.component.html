@@ -1,39 +1,32 @@
-<section id="proyectos" class="container-fluid">
-    <div class="container py-4 contenedor">
-        <h2 class="display-6 mb-3 h2-lines">Proyectos</h2><br>
-        <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#itemProyectoPlus">
-            <i *ngIf="isLogged" (click)="openNewProy()" class="bi bi-plus-circle"></i>
-        </span>
-        <div *ngIf="modalProyNew == true"><app-new-proyecto></app-new-proyecto></div>
-        <div class="row justify-content-center">
-            <div class="col-lg-6 " *ngFor="let proyectos of proyectos">
-                <div class="card shadow m-3 card-height1">
-                    <div>
-                        <img src="{{proyectos.imagen}}" alt="Portafolio" class="img-fluid">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title display-5 text-center">{{proyectos.nombre}}</h5>
-                        <p style="text-align:justify;" class="card-text fs-4">{{proyectos.descripcion}}</p>
-                        <div class="row justify-content-between mb-3">
-                            <div class="col-md">
-                                <p class="fs-4 mobile">
-                                    <span class="fw-bolder">Año:</span> {{proyectos.duracion}}
-                                </p>
-                            </div>
-                            <div class="col-md text-center">
-                                <a traget="_blank" [href]=proyectos.info class="btn btn-lg" style="
-                                margin-right: 20px;">Al sitio</a>
-                                <span class="align-self-end edit-icon" data-bs-toggle="modal"
-                                    data-bs-target="#itemProyectoModal">
-                                    <i *ngIf="isLogged" routerLink="/editProy/{{proyectos.id}}"
-                                        class="bi bi-pencil-square"></i>
-                                </span>
-                                <span class="edit-icon" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                    <i *ngIf="isLogged" (click)="delete(proyectos.id)" class="bi bi-trash3"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+<app-encabezado></app-encabezado>
+<div *ngIf="modalProjNew == true" [@expandCollapse]><app-new-proyecto></app-new-proyecto></div>
+<div class="d-flex flex-column align-items-center mt-4">
+    <span class="edit-icon">
+        <i *ngIf="isLogged" (click)="toggleNewHab()" type="button" [class.bi-plus-circle]="!isIconChanged"
+            [class.bi-x-circle]="isIconChanged"></i>
+    </span>
+</div>
+<section id="projects">
+    <div class="projects__container content">
+        <div class="card" *ngFor="let projects of projects.slice().reverse()" [@zoomIn]>
+            <img class="card__img" src="{{projects.image}}" alt="Portafolio">
+            <div class="card__body">
+                <h3>{{projects.name}}</h3>
+                <p class="card-text">{{projects.description}}</p>
+                <p class="mb-2">
+                    <span class="fw-bolder">Año:</span> {{projects.duration}}
+                </p>
+                <div class="p-buttons">
+                    <a class="p-btn btn" target="_blank" [href]="projects.repo">Repo</a>
+                    <a class="p-btn btn" target="_blank" [href]="projects.demo">Demo</a>
+                </div>
+                <div class="p-buttons">
+                    <span class="edit-icon">
+                        <i *ngIf="isLogged" (click)="delete(projects.id)" class="bi bi-trash3"></i>
+                    </span>
+                    <span class="edit-icon">
+                        <i *ngIf="isLogged" routerLink="/editProj/{{projects.id}}" class="bi bi-pencil-square"></i>
+                    </span>
                 </div>
             </div>
         </div>

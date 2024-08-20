@@ -1,25 +1,23 @@
 <div class="full-page">
-    <div class="container" *ngIf="persona">
+    <div class="container" *ngIf="person">
         <div class="row">
-            <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+            <form (ngSubmit)="update()" novalidate #f="ngForm">
                 <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="persona.nombre"
-                        required>
+                    <label for="name">Nombre:</label>
+                    <input type="text" class="form-control" id="name" name="name" [(ngModel)]="person.name" required>
                 </div><br>
                 <div class="form-group">
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="persona.apellido"
+                    <label for="lastname">Apellido:</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="person.lastname"
                         required>
                 </div><br>
                 <div class="form-group">
                     <label for="title">Especialización:</label>
-                    <input type="text" class="form-control" id="title" name="title" [(ngModel)]="persona.titulo"
-                        required>
+                    <input type="text" class="form-control" id="title" name="title" [(ngModel)]="person.title" required>
                 </div><br>
-                <div align="center">
-                    <button class="btn btn-primary" style="margin-right: 10px;">Actualizar</button>
-                    <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
+                <div class="d-flex justify-content-center">
+                    <button class="btn p-btn m-4" type="button" routerLink="/">Cancelar</button>
+                    <button class="btn p-btn m-4">Actualizar</button>
                 </div>
             </form>
         </div>

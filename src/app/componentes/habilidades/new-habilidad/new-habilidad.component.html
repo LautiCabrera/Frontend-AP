@@ -1,16 +1,21 @@
-<div class="container">
+<div class="container mt-4">
     <div class="row">
-        <form (ngSubmit)="Guardar()" novalidate #f="ngForm">
+        <form (ngSubmit)="save()" novalidate #f="ngForm">
             <div class="form-group">
-                <label for="nombre">Nombre de la habilidad:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required>
+                <label for="name">Nombre de la habilidad:</label>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="skill.name" required>
             </div><br>
             <div class="form-group">
-                <label for="descripcion">Porcentaje:</label>
-                <input type="text" class="form-control" id="progreso" name="progreso" [(ngModel)]="progreso" required>
+                <label for="icon">Icono de la habilidad (solo extensiones de imagenes):</label>
+                <input type="file" class="form-control" id="icon" name="icon" [(ngModel)]="skill.icon"
+                    (change)="uploadImage($event)" accept=".jpg, .jpeg, .png, .svg">
             </div><br>
-            <button class="btn btn-primary" style="margin-right: 10px;">Agregar habilidad</button>
-            <button class="btn btn-danger" type="button" (click)="Cancel()">Cancelar</button>
+            <div class="d-flex justify-content-center">
+                <img [src]="selectedImage ? imageService.urlSkill : 'assets/upload.jpg'" width="200">
+            </div><br>
+            <div class="d-flex justify-content-center">
+                <button class="btn p-btn m-4">Confirmar</button>
+            </div>
         </form>
     </div>
 </div>

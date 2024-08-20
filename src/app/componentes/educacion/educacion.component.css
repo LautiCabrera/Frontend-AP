@@ -1,17 +1,7 @@
-@media (max-width: 600px){
-    .container{
-        text-align: center;
-    }
+.effect {
+    transition: transform 0.3s ease-in-out;
 }
 
-@media (max-width: 600px){
-    .h2-lines{
-        left: 0rem;
-    }
-}
-
-@media (max-width: 600px){
-    .mobile{
-        text-align: left;
-    }
+.effect:hover {
+    transform: scale(1.5);
 }

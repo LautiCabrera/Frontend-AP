@@ -1,52 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Persona } from 'src/app/model/persona.model';
-import { JsonService } from 'src/app/service/json.service';
-import { ModalesService } from 'src/app/service/modales.service';
-import { PersonaService } from 'src/app/service/persona.service';
+import { ActivatedRoute } from '@angular/router';
+import { Person } from 'src/app/model/person.model';
+import { CrudService } from 'src/app/service/crud.service';
+import { PersonService } from 'src/app/service/person.service';
 
 @Component({
   selector: 'app-edit-encabezado',
   templateUrl: './edit-encabezado.component.html',
   styleUrls: ['./edit-encabezado.component.css']
 })
-export class EditEncabezadoComponent{
+export class EditEncabezadoComponent implements OnInit {
 
-  persona: Persona = new Persona("","","","","");
+  person: Person = new Person("", "", "", "", "");
+  private id!: number;
 
-  constructor(private personaService: PersonaService, private activatedRouter: ActivatedRoute, private router: Router, private modalSS: ModalesService) { }
+  constructor(
+    private personService: PersonService,
+    private activatedRouter: ActivatedRoute,
+    private crudService: CrudService
+  ) { }
 
   ngOnInit(): void {
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.personaService.detalle(id).subscribe(
-      data => {
-        this.persona = data;
-      }, _err => {
-        alert("Error al modificar");
-        this.router.navigate(['']);
-      }
-    )
+    this.id = this.activatedRouter.snapshot.params['id'];
+    this.loadPerson();
   }
 
-  onUpdate(): void {
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.personaService.actualizar(id, this.persona).subscribe(
-      data =>{
-        this.router.navigate(['']);
-      }, err =>{
-        alert("Error al modificar persona");
-        this.router.navigate(['']);
+  loadPerson(): void {
+    this.crudService.handleSingleDataLoad(
+      this.id, this.personService.detail.bind(this.personService), (data) => {
+        this.person = data;
       }
-    );  
-  }
-  
-  Cancel(){
-    this.modalSS.$modal.emit(false);
-    this.router.navigate(['']);
+    );
   }
 
+  update(): void {
+    this.crudService.handleUpdate(
+      this.personService.update(this.id, this.person),
+      'Información personal modificada con éxito.',
+      'Error al modificar información personal.'
+    );
+  }
 
 }
-
-
-

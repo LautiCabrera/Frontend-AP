@@ -1,30 +1,29 @@
-<section id="contacto" class="container-fluid">
-    <div class="container py-4 contenedor">
-        <h2 class="display-6 mb-3 h2-lines">Contacto</h2>
-        <div class="row">
-            <div class="col p-3 shadow mt-3">
-                <form (ngSubmit)="submitForm()" method="POST">
-                    <div class="row g-3 py-3">
-                        <div class="col-md-6">
-                            <input type="text" id="name" name="name" class="form-control fs-5"
-                                placeholder="Ingresá tu nombre" aria-label="Ingresa tu nombre" [(ngModel)]="myForm.name"
-                                required>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="email" id="email" name="email" class="form-control fs-5"
-                                placeholder="Ingresá tu correo" aria-label="Ingresa tu correo"
-                                [(ngModel)]="myForm.email" required>
-                        </div>
-                        <div class="col">
-                            <textarea id="message" name="message" class="form-control fs-5"
-                                placeholder="Dejame tus comentarios y/o sugerencias" style="height: 100px"
-                                [(ngModel)]="myForm.message" required>
-                            </textarea>
-                        </div>
+<app-encabezado></app-encabezado>
+<section class="container-fluid d-flex align-items-center">
+    <div class="container py-4 contenedor d-flex flex-column align-items-center">
+        <h2 class="display-6 mb-3 h2-lines">¡Contactame!</h2>
+        <div id="contact" class="row" [@bounceIn]>
+            <form class="d-flex flex-column align-items-end" (ngSubmit)="submitForm()" method="POST">
+                <div class="row g-3 py-3">
+                    <div class="col-md-6">
+                        <input type="text" id="name" name="name" class="form-control fs-5"
+                            placeholder="Ingresá tu nombre" aria-label="Ingresa tu nombre" [(ngModel)]="myForm.name"
+                            required>
                     </div>
-                    <button type="submit" class="btn btn-lg">Enviar mensaje</button>
-                </form>
-            </div>
+                    <div class="col-md-6">
+                        <input type="email" id="email" name="email" class="form-control fs-5"
+                            placeholder="Ingresá tu correo" aria-label="Ingresa tu correo" [(ngModel)]="myForm.email"
+                            required>
+                    </div>
+                    <div class="col">
+                        <textarea id="message" name="message" class="form-control fs-5"
+                            placeholder="Dejame tus comentarios y/o sugerencias" style="height: 100px"
+                            [(ngModel)]="myForm.message" required>
+                        </textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn p-btn">Enviar mensaje</button>
+            </form>
         </div>
     </div>
 </section>

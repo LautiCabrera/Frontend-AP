@@ -1,0 +1,25 @@
+.home {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    letter-spacing: 1px;
+    text-align: center;
+    z-index: 1;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.title img {
+    max-width: 90%;
+    height: auto;
+}
+
+.display-1{
+    color: var(--font-color);
+}

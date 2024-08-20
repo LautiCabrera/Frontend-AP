@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
+import { bounceIn } from 'src/app/animations/shared-animations';
 
 @Component({
   selector: 'app-contacto',
   templateUrl: './contacto.component.html',
-  styleUrls: ['./contacto.component.css']
+  styleUrls: ['./contacto.component.css'],
+  animations: [
+    bounceIn
+  ]
 })
-
-export class ContactoComponent implements OnInit {
+export class ContactoComponent {
 
   myForm = {
     name: '',
@@ -17,9 +20,6 @@ export class ContactoComponent implements OnInit {
   isFormSent = false;
 
   constructor(private http: HttpClient) { }
-
-  ngOnInit(): void {
-  }
 
   submitForm() {
     this.http.post('https://formspree.io/f/mdovybep', this.myForm)

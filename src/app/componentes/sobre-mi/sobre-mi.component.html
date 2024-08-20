@@ -1,16 +1,41 @@
-<section id="sobre_mi" class="container-fluid mt-3">
-    <div class="container py-4 contenedor">
-        <h2 class="display-6 mb-3 h2-lines">Sobre mí</h2>
-        <div class="row align-items-center py-3">
-            <div class="col-sm-4">
-                <img src={{persona.imagen}} alt="profile" class="img-fluid">
-                <span *ngIf="isLogged" class="edit-icon" data-bs-toggle="modal" data-bs-target="#editFotoModal">
-                    <i routerLink="/editPer/{{persona.id}}" *ngIf="isLogged" class="bi bi-pencil-square"></i>
-                </span>
-            </div>
-            <div class="col-sm-8 mt-3">
-                <p style="text-align:justify;" class="fs-4">{{persona.descripcion}}</p>
+<app-encabezado></app-encabezado>
+<div class="content">
+    <section id="about" class="container-fluid d-flex align-items-center">
+        <div class="container py-4 contenedor d-flex flex-column align-items-center">
+            <div class="row justify-content-center align-items-center py-3 w-100 aboutContent">
+                <div class="col-12 col-md-4 text-center d-flex align-items-baseline content-photo" [@slideInLeft]>
+                    <img src="{{person.image}}" alt="profile" class="img-fluid photo">
+                    <span *ngIf="isLogged" class="edit-icon">
+                        <i routerLink="/editPer/{{person.id}}" *ngIf="isLogged" class="bi bi-pencil-square"></i>
+                    </span>
+                </div>
+                <div class="col-12 col-custom-8" [@slideInRight]>
+                    <h3 class="fw-bold mb-4 center">Soy {{person.title}}</h3>
+                    <p class="fs-6 description"> {{person.description}}</p>
+                    <div class="infoContainer fw-bold">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <span>Nombre:</span>
+                                <p>{{person.name}} {{person.lastname}}.</p>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <span>Ubicación:</span>
+                                <p>Mendoza, Argentina.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <span>Edad:</span>
+                                <p>22 años.</p>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <span>Disponibilidad:</span>
+                                <p>Abierto a ofertas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

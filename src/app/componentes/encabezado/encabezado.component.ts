@@ -1,34 +1,30 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Persona } from 'src/app/model/persona.model';
-import { PersonaService } from 'src/app/service/persona.service';
+import { Component, Inject } from '@angular/core';
+import { PersonService } from 'src/app/service/person.service';
 import { TokenService } from 'src/app/service/token.service';
+import { ThemeService } from 'src/app/service/theme.service';
+import { AppComponent } from 'src/app/app.component';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-encabezado',
   templateUrl: './encabezado.component.html',
   styleUrls: ['./encabezado.component.css']
 })
+export class EncabezadoComponent extends AppComponent {
 
-export class EncabezadoComponent {
-  
-  isLogged = false;
-  isCollapsed = false;
-  persona: Persona = new Persona("","","","","");
+  constructor(
+    public override notificationService: NotificationService,
+    public themeService: ThemeService, 
+    public override personService: PersonService,
+    tokenService: TokenService,
+    @Inject('personId') protected override personId: number
+  ) {
+    super(notificationService, tokenService, personService, personId); 
+  } 
 
-  constructor(public personaService: PersonaService, private router: Router, private tokenService: TokenService) { }
-
-  ngOnInit(): void {
-    this.cargarPersona();
-    if(this.tokenService.getToken()){
-      this.isLogged = true;
-    }else {
-      this.isLogged = false;
-    }
-  }
-
-  toggleMenu() {
-    this.isCollapsed = !this.isCollapsed;
+  toggleTheme() {
+    const newTheme = this.themeService.getTheme() === 'light' ? 'dark' : 'light';
+    this.themeService.setTheme(newTheme);
   }
 
   onLogOut():void{
@@ -36,16 +32,4 @@ export class EncabezadoComponent {
     window.location.reload();
   }
 
-  login(){
-    this.router.navigate(['/login'])
-  }
-
-  construirUrl(titulo: String): String{
-    const imagePath = 'https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=50&pause=1000&color=6052FF&center=true&width=1000&height=150&lines=';
-    return `${imagePath}${titulo}`;
-  }
-
-  cargarPersona(){
-    this.personaService.detalle(2).subscribe(data => {this.persona = data});
-  }
 }

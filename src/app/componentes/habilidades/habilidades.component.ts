@@ -1,57 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { Habilidades } from 'src/app/model/habilidades';
-import { HabilidadesService } from 'src/app/service/habilidades.service';
+import { Component, Inject } from '@angular/core';
+import { Skill } from 'src/app/model/skill';
+import { SkillService } from 'src/app/service/skill.service';
 import { TokenService } from 'src/app/service/token.service';
-import { ModalesService } from 'src/app/service/modales.service';
+import { NotificationService } from 'src/app/service/notification.service';
+import { bounceIn, expandCollapse, zoomIn } from 'src/app/animations/shared-animations';
+import { AppComponent } from 'src/app/app.component';
+import { PersonService } from 'src/app/service/person.service';
+import { CrudService } from 'src/app/service/crud.service';
 
 @Component({
   selector: 'app-habilidades',
   templateUrl: './habilidades.component.html',
-  styleUrls: ['./habilidades.component.css']
+  styleUrls: ['./habilidades.component.css'],
+  animations: [
+    expandCollapse,
+    bounceIn,
+    zoomIn
+  ]
 })
+export class HabilidadesComponent extends AppComponent {
 
-export class HabilidadesComponent implements OnInit {
+  skill: Skill[] = [];
+  modalHabNew = false;
+  isIconChanged = false;
 
-  habilidad: Habilidades[] = [];
-  modalHabNew: boolean;
-  modalHabEdit: boolean;
-
-  constructor(private habilidadesService: HabilidadesService, private tokenService: TokenService, private modalSS: ModalesService) { }
-  isLogged = false;
-  
-  ngOnInit(): void {
-    this.cargarHabilidad();
-    if(this.tokenService.getToken()){
-      this.isLogged = true;
-      this.modalSS.$modal.subscribe((valor)=>{this.modalHabNew = valor});
-      this.modalSS.$modal.subscribe((valor)=>{this.modalHabEdit = valor});
-    } else {
-      this.isLogged = false;
-    }
+  constructor(
+    public skillService: SkillService,
+    private crudService: CrudService,
+    public override notificationService: NotificationService,
+    public override personService: PersonService,
+    tokenService: TokenService,
+    @Inject('personId') protected override personId: number
+  ) {
+    super(notificationService, tokenService, personService, personId);
   }
 
-  cargarHabilidad(): void{
-    this.habilidadesService.lista().subscribe(
-      data => {
-        this.habilidad = data;
-      }
-    )
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.loadSkills();
   }
 
-  delete(id: number){
-    if(id != undefined){
-      this.habilidadesService.delete(id).subscribe(
-        data => {
-          this.cargarHabilidad();
-        }, err => {
-          alert("No se pudo borrar la habilidad");
-        }
-      )
-    }
+  loadSkills(): void {
+    this.crudService.handleDataLoad(this.skillService.list(), (data) => {
+      this.skill = data;
+    });
   }
 
-  openNewHab(){
-    this.modalHabNew = true;
+  delete(id?: number): void {
+    this.crudService.handleDelete(id, this.skillService.delete.bind(this.skillService), 'Habilidad eliminada con éxito.', this.loadSkills.bind(this));
+  }
+
+  toggleNewHab() {
+    this.modalHabNew = !this.modalHabNew;
+    this.isIconChanged = !this.isIconChanged;
   }
 
 }

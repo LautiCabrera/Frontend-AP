@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Proyectos } from 'src/app/model/proyectos';
-import { ModalesService } from 'src/app/service/modales.service';
-import { ProyectoService } from 'src/app/service/proyecto.service';
+import { Project } from 'src/app/model/proyect';
+import { CrudService } from 'src/app/service/crud.service';
+import { ImagesService } from 'src/app/service/images.service';
+import { ProjectService } from 'src/app/service/proyecto.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-new-proyecto',
@@ -11,38 +12,28 @@ import { ProyectoService } from 'src/app/service/proyecto.service';
 })
 export class NewProyectoComponent {
 
-  nombre: String;
-  descripcion: String;
-  duracion: String;
-  imagen: String;
-  info: String;
+  project: Project = new Project("", "", "", "", "", "");
+  public selectedImage = false;
 
-  constructor(private proyecto: ProyectoService, private router: Router, private modalSS: ModalesService) { }
+  constructor(
+    private projectService: ProjectService,
+    private crudService: CrudService,
+    public imageService: ImagesService
+  ) { }
 
-  ngOnInit(): void {
-  } 
- 
-  Guardar(): void{
-    const proyecto = new Proyectos(this.nombre, this.descripcion, this.duracion, this.imagen, this.info);
-    this.proyecto.save(proyecto).subscribe(
-      data =>{
-        alert("Proyecto añadido con éxito");
-        this.modalSS.$modal.emit(false);
-        const scrollX = window.scrollX;
-        const scrollY = window.scrollY;
-        window.location.reload();
-        window.scrollTo(scrollX, scrollY);
-        this.router.navigate(['']);
-      }, err =>{
-        alert("Fallo al añadir Proyecto");
-        this.modalSS.$modal.emit(false);
-      }
-    )
+  save(): void {
+    this.project.image = this.imageService.urlProj;
+    this.crudService.handleSave(
+      this.projectService.save(this.project), '¡Proyecto añadido con éxito!', 'Error al añadir proyecto'
+    );
+    location.reload();
   }
 
-  Cancel(){
-    this.modalSS.$modal.emit(false);
-    this.router.navigate(['']);
-  }  
+  uploadImage($event: any) {
+    const uuid = uuidv4();
+    const name = "/New/project_" + uuid;
+    this.imageService.uploadImage($event, name, "Proyect");
+    this.selectedImage = true;
+  }
 
 }
