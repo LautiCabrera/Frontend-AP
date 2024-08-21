@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { bounceIn } from 'src/app/animations/shared-animations';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-contacto',
@@ -19,23 +20,21 @@ export class ContactoComponent {
   }
   isFormSent = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
   submitForm() {
     this.http.post('https://formspree.io/f/mdovybep', this.myForm)
       .subscribe(response => {
-        console.log(response);
         this.isFormSent = true;
         this.myForm = {
           name: '',
           email: '',
           message: ''
         }
-        alert('El mensaje fue enviado con éxito');
-    }, error => {
-      console.log(error);
-      alert('Ocurrió un error al enviar el mensaje');
-    });
+        this.notificationService.showSuccess('El mensaje fue enviado con éxito');
+      }, error => {
+        this.notificationService.showError('Ocurrió un error al enviar el mensaje');
+      });
   }
 
 }

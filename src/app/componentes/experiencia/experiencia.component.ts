@@ -25,13 +25,13 @@ export class ExperienciaComponent extends AppComponent {
 
   constructor(
     public experienceService: ExperienceService,
-    private crudService: CrudService,
-    public override notificationService: NotificationService,
-    public override personService: PersonService,
+    notificationService: NotificationService,
+    personService: PersonService,
     tokenService: TokenService,
+    crudService: CrudService,
     @Inject('personId') protected override personId: number
   ) {
-    super(notificationService, tokenService, personService, personId);
+    super(notificationService, tokenService, personService, crudService, personId);
   }
 
   override ngOnInit(): void {
@@ -40,7 +40,8 @@ export class ExperienciaComponent extends AppComponent {
   }
 
   loadExperiences(): void {
-    this.crudService.handleDataLoad(this.experienceService.list(), (data) => {
+    const cacheKey = 'experiences';
+    this.crudService.handleDataLoad(this.experienceService.list(), cacheKey, (data) => {
       this.experience = data;
     });
   }

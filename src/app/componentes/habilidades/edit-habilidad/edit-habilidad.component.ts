@@ -30,7 +30,10 @@ export class EditHabilidadComponent implements OnInit {
 
   loadSkill(): void {
     this.crudService.handleSingleDataLoad(
-      this.id, this.skillService.detail.bind(this.skillService), (data) => {
+      this.id,
+      this.skillService.detail.bind(this.skillService),
+      'skill_edit',
+      (data) => {
         this.skill = data;
       }
     );

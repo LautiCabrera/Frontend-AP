@@ -2,34 +2,54 @@ import { Injectable } from "@angular/core";
 import { Location } from '@angular/common';
 import { Observable } from "rxjs";
 import { NotificationService } from "./notification.service";
+import { CacheService } from "./cache.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CrudService {
 
-    constructor(private notificationService: NotificationService, private location: Location) { }
+    constructor(private notificationService: NotificationService, private location: Location, private cacheService: CacheService) { }
 
-    handleSingleDataLoad<T>(id: number, serviceCall: (id: number) => Observable<T>, onSuccess: (data: T) => void): void {
-        serviceCall(id).subscribe({
-            next: (data) => {
-                onSuccess(data);
-            },
-            error: (error) => {
-                console.error(`Error loading resource with ID ${id}:`, error);
-            }
-        });
+    handleSingleDataLoad<T>(
+        id: number,
+        serviceCall: (id: number) => Observable<T>,
+        cacheKeyPrefix: string,
+        onSuccess: (data: T) => void
+    ): void {
+        const cacheKey = `${cacheKeyPrefix}_${id}`;
+        const cachedData = this.cacheService.getCache<T>(cacheKey);
+
+        if (cachedData) {
+            onSuccess(cachedData);
+        } else {
+            serviceCall(id).subscribe({
+                next: (data) => {
+                    this.cacheService.setCache(cacheKey, data); // Almacena los datos en el cache
+                    onSuccess(data);
+                },
+                error: (error) => {
+                    console.error(`Error loading resource with ID ${id}:`, error);
+                }
+            });
+        }
     }
 
-    handleDataLoad<T>(serviceCall: Observable<T>, onSuccess: (data: T) => void): void {
-        serviceCall.subscribe({
-            next: (data) => {
-                onSuccess(data);
-            },
-            error: (error) => {
-                console.error('Error loading resources:', error);
-            }
-        });
+    handleDataLoad<T>(serviceCall: Observable<T>, cacheKey: string, onSuccess: (data: T) => void): void {
+        const cachedData = this.cacheService.getCache<T>(cacheKey);
+        if (cachedData) {
+            onSuccess(cachedData);
+        } else {
+            serviceCall.subscribe({
+                next: (data) => {
+                    this.cacheService.setCache(cacheKey, data); // Almacena los datos en el cache
+                    onSuccess(data);
+                },
+                error: (error) => {
+                    console.error('Error loading resources:', error);
+                }
+            });
+        }
     }
 
     handleSave<T>(saveCall: Observable<T>, successMessage: string, errorMessage: string): void {

@@ -1,5 +1,5 @@
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-<div id="main-container">
+<div *ngIf="!isLoading" id="main-container">
     <router-outlet></router-outlet>
     <app-pie-pagina></app-pie-pagina>
 </div>

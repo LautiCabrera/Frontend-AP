@@ -32,7 +32,7 @@ export class NewProyectoComponent {
   uploadImage($event: any) {
     const uuid = uuidv4();
     const name = "/New/project_" + uuid;
-    this.imageService.uploadImage($event, name, "Proyect");
+    this.imageService.uploadImage($event, name, "Project");
     this.selectedImage = true;
   }
 

@@ -30,7 +30,10 @@ export class EditProyectoComponent implements OnInit {
 
   loadProject(): void {
     this.crudService.handleSingleDataLoad(
-      this.id, this.projectService.detail.bind(this.projectService), (data) => {
+      this.id,
+      this.projectService.detail.bind(this.projectService),
+      'project_edit',
+      (data) => {
         this.project = data;
       }
     );

@@ -3,7 +3,7 @@ import { Person } from './model/person.model';
 import { PersonService } from './service/person.service';
 import { TokenService } from './service/token.service';
 import { NotificationService } from './service/notification.service';
-import { Observable } from 'rxjs';
+import { CrudService } from './service/crud.service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
     public notificationService: NotificationService,
     protected tokenService: TokenService,
     public personService: PersonService,
+    public crudService: CrudService,
     @Inject('personId') protected personId: number
   ) { }
 
@@ -36,15 +37,15 @@ export class AppComponent implements OnInit {
   }
 
   loadPerson(): void {
-    this.personService.detail(this.personId).subscribe({
-      next: (data) => {
+    this.crudService.handleSingleDataLoad(
+      this.personId,
+      this.personService.detail.bind(this.personService),
+      'person',
+      (data) => {
         this.person = data;
         this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading resources:', error);
       }
-    });
+    );
   }
 
 }

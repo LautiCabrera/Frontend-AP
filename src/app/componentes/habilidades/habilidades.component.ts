@@ -26,13 +26,13 @@ export class HabilidadesComponent extends AppComponent {
 
   constructor(
     public skillService: SkillService,
-    private crudService: CrudService,
-    public override notificationService: NotificationService,
-    public override personService: PersonService,
+    notificationService: NotificationService,
+    personService: PersonService,
     tokenService: TokenService,
+    crudService: CrudService,
     @Inject('personId') protected override personId: number
   ) {
-    super(notificationService, tokenService, personService, personId);
+    super(notificationService, tokenService, personService, crudService, personId);
   }
 
   override ngOnInit(): void {
@@ -41,7 +41,8 @@ export class HabilidadesComponent extends AppComponent {
   }
 
   loadSkills(): void {
-    this.crudService.handleDataLoad(this.skillService.list(), (data) => {
+    const cacheKey = 'skills';
+    this.crudService.handleDataLoad(this.skillService.list(), cacheKey, (data) => {
       this.skill = data;
     });
   }

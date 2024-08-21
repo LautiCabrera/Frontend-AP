@@ -25,13 +25,13 @@ export class ProyectosComponent extends AppComponent {
 
   constructor(
     private projectService: ProjectService,
-    private crudService: CrudService,
-    public override notificationService: NotificationService,
-    public override personService: PersonService,
+    notificationService: NotificationService,
+    personService: PersonService,
     tokenService: TokenService,
+    crudService: CrudService,
     @Inject('personId') protected override personId: number
   ) {
-    super(notificationService, tokenService, personService, personId);
+    super(notificationService, tokenService, personService, crudService, personId);
   }
 
   override ngOnInit(): void {
@@ -40,7 +40,8 @@ export class ProyectosComponent extends AppComponent {
   }
 
   loadProjects(): void {
-    this.crudService.handleDataLoad(this.projectService.list(), (data) => {
+    const cacheKey = 'projects';
+    this.crudService.handleDataLoad(this.projectService.list(), cacheKey, (data) => {
       this.projects = data;
     });
   }

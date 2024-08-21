@@ -30,7 +30,10 @@ export class EditSobreMiComponent implements OnInit {
 
   loadPerson(): void {
     this.crudService.handleSingleDataLoad(
-      this.id, this.personService.detail.bind(this.personService), (data) => {
+      this.id,
+      this.personService.detail.bind(this.personService),
+      'person_edit',
+      (data) => {
         this.person = data;
       }
     );

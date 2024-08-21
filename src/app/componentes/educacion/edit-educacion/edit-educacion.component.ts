@@ -30,7 +30,10 @@ export class EditEducacionComponent implements OnInit {
 
   loadEducation(): void {
     this.crudService.handleSingleDataLoad(
-      this.id, this.educationService.detail.bind(this.educationService), (data) => {
+      this.id,
+      this.educationService.detail.bind(this.educationService),
+      'education_edit',
+      (data) => {
         this.education = data;
       }
     );

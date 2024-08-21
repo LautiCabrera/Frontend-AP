@@ -4,6 +4,7 @@ import { TokenService } from 'src/app/service/token.service';
 import { ThemeService } from 'src/app/service/theme.service';
 import { AppComponent } from 'src/app/app.component';
 import { NotificationService } from 'src/app/service/notification.service';
+import { CrudService } from 'src/app/service/crud.service';
 
 @Component({
   selector: 'app-encabezado',
@@ -13,21 +14,22 @@ import { NotificationService } from 'src/app/service/notification.service';
 export class EncabezadoComponent extends AppComponent {
 
   constructor(
-    public override notificationService: NotificationService,
-    public themeService: ThemeService, 
-    public override personService: PersonService,
+    public themeService: ThemeService,
+    notificationService: NotificationService,
+    personService: PersonService,
     tokenService: TokenService,
+    crudService: CrudService,
     @Inject('personId') protected override personId: number
   ) {
-    super(notificationService, tokenService, personService, personId); 
-  } 
+    super(notificationService, tokenService, personService, crudService, personId);
+  }
 
   toggleTheme() {
     const newTheme = this.themeService.getTheme() === 'light' ? 'dark' : 'light';
     this.themeService.setTheme(newTheme);
   }
 
-  onLogOut():void{
+  onLogOut(): void {
     this.tokenService.logOut();
     window.location.reload();
   }

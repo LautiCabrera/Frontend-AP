@@ -25,13 +25,13 @@ export class EducacionComponent extends AppComponent {
 
   constructor(
     private educationService: EducationService,
-    private crudService: CrudService,
-    public override notificationService: NotificationService,
-    public override personService: PersonService,
+    notificationService: NotificationService,
+    personService: PersonService,
     tokenService: TokenService,
+    crudService: CrudService,
     @Inject('personId') protected override personId: number
   ) {
-    super(notificationService, tokenService, personService, personId);
+    super(notificationService, tokenService, personService, crudService, personId);
   }
 
   override ngOnInit(): void {
@@ -40,13 +40,10 @@ export class EducacionComponent extends AppComponent {
   }
 
   loadEducacions(): void {
-    this.crudService.handleDataLoad(
-      this.educationService.list(),
-      (data) => {
-        this.education = data;
-        this.isLoading = true;
-      }
-    );
+    const cacheKey = 'educations';
+    this.crudService.handleDataLoad(this.educationService.list(), cacheKey, (data) => {
+      this.education = data;
+    });
   }
 
   delete(id?: number): void {

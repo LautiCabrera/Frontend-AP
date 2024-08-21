@@ -30,7 +30,10 @@ export class EditExperienciaComponent implements OnInit {
 
   loadExperience(): void {
     this.crudService.handleSingleDataLoad(
-      this.id, this.experienceService.detail.bind(this.experienceService), (data) => {
+      this.id,
+      this.experienceService.detail.bind(this.experienceService),
+      'experience_edit',
+      (data) => {
         this.experience = data;
       }
     );

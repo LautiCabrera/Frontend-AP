@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage, StorageReference, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
+import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +37,7 @@ export class ImagesService {
       case "Education":
         this.urlEdu = url;
         break;
-      case "Proyect":
+      case "Project":
         this.urlProj = url;
         break;
       case "Experience":
