@@ -22,10 +22,10 @@ export class NewExperienciaComponent {
   ) { }
 
   save(): void {
+    this.experience.image = this.imageService.urlExp;
     this.crudService.handleSave(
       this.experienceService.save(this.experience), 'Experiencia añadida con éxito!', 'Error al añadir experiencia'
     );
-    location.reload();
   }
 
   uploadImage($event: any) {

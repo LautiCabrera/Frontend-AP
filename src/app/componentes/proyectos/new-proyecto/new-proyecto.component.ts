@@ -26,7 +26,6 @@ export class NewProyectoComponent {
     this.crudService.handleSave(
       this.projectService.save(this.project), '¡Proyecto añadido con éxito!', 'Error al añadir proyecto'
     );
-    location.reload();
   }
 
   uploadImage($event: any) {

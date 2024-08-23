@@ -57,7 +57,7 @@ export class CrudService {
             data => {
                 this.notificationService.showSuccess(successMessage);
                 setTimeout(() => {
-
+                    location.reload();
                 }, 3000);
             },
             err => {

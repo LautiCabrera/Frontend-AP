@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginUsuario } from 'src/app/model/login-usuario';
 import { AuthService } from 'src/app/service/auth.service';
+import { NotificationService } from 'src/app/service/notification.service';
 import { TokenService } from 'src/app/service/token.service';
 
 @Component({
@@ -20,10 +21,11 @@ export class LoginComponent implements OnInit {
   errMsj = '';
 
   constructor(
-    private tokenService: TokenService, 
-    private authService: AuthService, 
+    private notificationService: NotificationService,
+    private tokenService: TokenService,
+    private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isLogged = !!this.tokenService.getToken();
@@ -34,13 +36,14 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     this.loginUsuario = new LoginUsuario(this.userName, this.password);
-    
+
     this.authService.login(this.loginUsuario).subscribe({
       next: data => {
         this.handleSuccessfulLogin(data);
       },
       error: err => {
         this.handleFailedLogin(err);
+        this.notificationService.showSuccess('Credenciales incorrectas.');
       }
     });
   }
@@ -61,5 +64,5 @@ export class LoginComponent implements OnInit {
     this.errMsj = err.error?.mensaje || 'Error occurred during login';
     console.error(this.errMsj);
   }
-  
+
 }

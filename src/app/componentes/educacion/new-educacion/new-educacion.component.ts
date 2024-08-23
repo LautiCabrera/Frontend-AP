@@ -22,10 +22,10 @@ export class NewEducacionComponent {
   ) { }
 
   save(): void {
+    this.education.image = this.imageService.urlEdu;
     this.crudService.handleSave(
       this.educationService.save(this.education), '¡Educación añadida con éxito!', 'Error al añadir educación'
     );
-    location.reload();
   }
 
   uploadImage($event: any) {

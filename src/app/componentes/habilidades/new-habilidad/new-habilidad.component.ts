@@ -26,7 +26,6 @@ export class NewHabilidadComponent {
     this.crudService.handleSave(
       this.skillService.save(this.skill), '¡Habilidad añadida con éxito!', 'Error al añadir habilidad'
     );
-    location.reload();
   }
 
   uploadImage($event: any) {
